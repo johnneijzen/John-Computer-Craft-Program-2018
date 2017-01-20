@@ -1,4 +1,4 @@
-local version = 0.2
+local version = 2
 
 local test()
 	print("test")
