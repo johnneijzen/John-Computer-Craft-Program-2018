@@ -1,6 +1,0 @@
-Excavation2017
-0.03
-https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Excavation2017.lua
-versiontest
-0.2
-https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/versiontest.lua
