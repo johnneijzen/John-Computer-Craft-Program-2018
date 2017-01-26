@@ -3,7 +3,7 @@ local options = {
 	"Tunnel Program",
 	"Strip Mining Program"
 }
-local optionSize = 2
+local optionSize = 3
 local n
 
 local function runOptions()
