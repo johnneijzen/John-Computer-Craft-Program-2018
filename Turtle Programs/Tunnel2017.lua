@@ -24,7 +24,7 @@ local function itemCount()
 end
 
 -- Checking
-local function checking()
+local function check()
     if noFuelNeed == 0 then
         if fuelCount == 0 then
             print("Turtle has no fuel")
@@ -145,7 +145,7 @@ local function start()
     end
     repeat
         itemCount()
-        checking()
+        check()
         sleep(5)
     until errorItems == 0
     tunnel()
