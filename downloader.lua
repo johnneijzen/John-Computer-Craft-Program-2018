@@ -47,6 +47,5 @@ local function update()
 	shell.run("JohnPrograms")
 end
 
-
 update()
 
