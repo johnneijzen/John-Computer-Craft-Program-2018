@@ -1,7 +1,7 @@
 local download1 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Excavation2017.lua")
 local download2 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Tunnel2017.lua")
-local download3 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/JohnPrograms.lua")
-local download4 = http.get("")
+local download3 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/StripMining2017.lua")
+local download4 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/JohnPrograms.lua")
  
 local function downloadExcavation()
     local file = 0
@@ -35,8 +35,8 @@ local function downloadStripMining()
     local file = 0
     local temp = 0
  
-    temp = download4.readAll()
-    download4.close()
+    temp = download3.readAll()
+    download3.close()
  
     fs.delete("john-ComputerCraft-Program/StripMining2017") -- To make sure it updates
  
@@ -49,8 +49,8 @@ local function downloadJohnPrograms()
     local file = 0
     local temp = 0
  
-    temp = download3.readAll()
-    download3.close()
+    temp = download4.readAll()
+    download4.close()
 
     fs.delete("JohnPrograms") -- To make sure it updates
  
