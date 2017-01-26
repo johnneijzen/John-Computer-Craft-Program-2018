@@ -18,7 +18,7 @@ local function gui()
 	n = 1
 	while true do
 		term.clear()
-		term.setcursorpos(0,0)
+		term.setcursorpos(1,1)
 		for i = 1, optionSize do
 			if n==i then
 				print("---> "..option[i])
