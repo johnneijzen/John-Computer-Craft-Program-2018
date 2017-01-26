@@ -21,9 +21,9 @@ local function gui()
 		term.setCursorPos(1,1)
 		for i = 1, optionSize do
 			if n==i then
-				print("---> "..option[i])
+				print("---> "..options[i])
 			else
-				print("     "..option[i])
+				print("     "..options[i])
 			end
 		end
 		key = os.pullEvent("key")
