@@ -1,10 +1,11 @@
 --[[
 Version
-    0.03 - 1/26/2017
+    0.04 - 1/26/2017
 Changelog
     0.01 - 1/21/2017
     0.02 - 1/26/2017 Bug Fixing
-    0.03 - Function Renaming and fix fuelcode
+    0.03 - Function Renaming and Fix fuelcode
+    0.04 - Worng Variables Fix
 ]]--
 
 -- Locals Variables
@@ -65,7 +66,7 @@ end
 
 -- Refuel
 local function refuel()
-    if noFuelNeed == 0 then
+    if noFuelNeeded == 0 then
         repeat
             if turtle.getFuelLevel() < 120 then
                 if fuelSlot1 > 0 then
