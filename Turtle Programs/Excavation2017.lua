@@ -1,10 +1,11 @@
 --[[
 Version
-	0.03 1/20/2017
+	0.04 1/20/2017
 Changelog
 	0.01 1/20/2017 -- Copy my old code
 	0.02 1/20/2017 -- Added Item Worng Place Checking Code
 	0.03 1/20/2017 -- Added EnderChest Support Not Tested
+	0.04 1/26/2016 -- Bug Fixing
 ]]
 
 -- Local Variables in My New Program style it now a-z not random
@@ -321,7 +322,7 @@ local function start()
 	print("Do You Want Redstone as Starting Input")
 	print("Note: Redstone can be detected from back")
 	print("Y or N")
-	starting = tonumber(read())
+	starting = read()
 	if starting == "Y" or "y" then
 		repeat
 			os.pullEvent("redstone") -- Wait For Redstone Input without it break with words Too long without yielding.
