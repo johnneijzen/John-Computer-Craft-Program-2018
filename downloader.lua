@@ -17,7 +17,7 @@ local function downloadTunnel()
 	local temp
 	local file
 
-	download = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Excavation2017.lua")
+	download = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Tunnel2017.lua")
 	temp = download.readAll()
 	download.close()
 
@@ -26,12 +26,12 @@ local function downloadTunnel()
 	file.close()
 end
 
-local function downloadRunPrograms()
+local function downloadJohnPrograms()
 	local download
 	local temp
 	local file
 
-	download = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Excavation2017.lua")
+	download = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/JohnPrograms.lua")
 	temp = download.readAll()
 	download.close()
 
@@ -43,6 +43,8 @@ end
 local function update()
 	downloadExcavation()
 	downloadTunnel()
+	downloadJohnPrograms()
+	shell.run("JohnPrograms")
 end
 
 
