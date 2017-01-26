@@ -1,3 +1,12 @@
+--[[ 
+    Version 
+        0.02
+    Changelogs
+        0.01 Added Support for Excavation2017.lua
+             Added Support for Tunnel2017.lua
+        0.02 Added Support for StripMining.lua
+]]--
+
 local download1 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Excavation2017.lua")
 local download2 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Tunnel2017.lua")
 local download3 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/StripMining2017.lua")
