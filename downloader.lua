@@ -9,6 +9,8 @@ local function downloadExcavation()
     temp = download1.readAll()
     download1.close()
  
+    fs.delete("john-ComputerCraft-Program/Excavation2017") -- To make sure it updates
+ 
     file = fs.open("john-ComputerCraft-Program/Excavation2017","w")
     file.write(temp)
     file.close()
@@ -21,6 +23,8 @@ local function downloadTunnel()
     temp = download2.readAll()
     download2.close()
  
+    fs.delete("john-ComputerCraft-Program/Tunnel2017") -- To make sure it updates
+ 
     file = fs.open("john-ComputerCraft-Program/Tunnel2017","w")
     file.write(temp)
     file.close()
@@ -32,6 +36,8 @@ local function downloadJohnPrograms()
  
     temp = download3.readAll()
     download3.close()
+
+    fs.delete("JohnPrograms") -- To make sure it updates
  
     file = fs.open("JohnPrograms","w")
     file.write(temp)
