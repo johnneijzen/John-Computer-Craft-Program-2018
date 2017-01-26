@@ -1,16 +1,16 @@
 --[[
 Version
-	0.01 - 1/21/2017
+	0.02 - 1/26/2017
 Changelog
 	0.01 - 1/21/2017
-
-]]
+	0.02 - 1/26/2017 Bug Fixing
+]]--111
 
 -- Locals Variables
 local noFuelNeeded = 0 -- Check if turtle is using no fuel config
-local itemFuel = turtle.getItemCount(1) -- Fuel Slot 1
-local itemFuel1 = turtle.getItemCount(2) -- Fuel Slot 2
-local chest = turtle.getItemCount(3) -- Chest Slot 3
+local itemFuel = 0 -- Fuel Slot 1
+local itemFuel1 = 0 -- Fuel Slot 2
+local chest = 0 -- Chest Slot 3
 local distance = 0 -- Distance will dig
 local distanceCount = 0 -- Count the distance
 local errorItems = 0
@@ -123,7 +123,7 @@ local function chestDump()
 	end
 end
 
-function main()
+local function tunnel()
 	repeat
 		refuel()
 		dig()
@@ -132,7 +132,7 @@ function main()
 	until distance == distanceCount
 end
 
-function start()
+local function start()
 	print("Welcome To John Tunnel Program")
 	print("This 3x3 Tunnel Program 4x4 is coming soon after this one is done")
 	print("Please Input Your Fuel In Slot 1 and Slot 2(Optional) and Chest in Slot 3")
@@ -147,7 +147,7 @@ function start()
 		check()
 		sleep(5)
 	until errorItems == 0
-	main()
+	tunnel()
 end
 
 start()
