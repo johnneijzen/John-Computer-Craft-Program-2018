@@ -1,9 +1,10 @@
 --[[
 Version
-    0.02 - 1/26/2017
+    0.03 - 1/26/2017
 Changelog
     0.01 - 1/21/2017
     0.02 - 1/26/2017 Bug Fixing
+    0.03 - Function Renaming
 ]]--
 
 -- Locals Variables
