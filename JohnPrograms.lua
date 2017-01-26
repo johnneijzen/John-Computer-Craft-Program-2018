@@ -1,6 +1,7 @@
 local options = {
 	"Excavation Program",
-	"Tunnel Program"
+	"Tunnel Program",
+	"Strip Mining Program"
 }
 local optionSize = 2
 local n
@@ -10,6 +11,8 @@ local function runOptions()
 		shell.run("john-ComputerCraft-Program/Excavation2017")
 	elseif n == 2 then
 		shell.run("john-ComputerCraft-Program/Tunnel2017")
+	elseif n == 3 then
+		shell.run("john-ComputerCraft-Program/StripMining2017")
 	end
 end
 

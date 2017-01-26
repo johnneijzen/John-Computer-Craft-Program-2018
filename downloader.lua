@@ -1,6 +1,7 @@
 local download1 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Excavation2017.lua")
 local download2 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Tunnel2017.lua")
 local download3 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/JohnPrograms.lua")
+local download4 = http.get("")
  
 local function downloadExcavation()
     local file = 0
@@ -26,6 +27,20 @@ local function downloadTunnel()
     fs.delete("john-ComputerCraft-Program/Tunnel2017") -- To make sure it updates
  
     file = fs.open("john-ComputerCraft-Program/Tunnel2017","w")
+    file.write(temp)
+    file.close()
+end
+
+local function downloadStripMining()
+    local file = 0
+    local temp = 0
+ 
+    temp = download4.readAll()
+    download4.close()
+ 
+    fs.delete("john-ComputerCraft-Program/StripMining2017") -- To make sure it updates
+ 
+    file = fs.open("john-ComputerCraft-Program/StripMining2017","w")
     file.write(temp)
     file.close()
 end
