@@ -4,13 +4,13 @@ Version
 Changelog
     0.01 - 1/21/2017
     0.02 - 1/26/2017 Bug Fixing
-    0.03 - Function Renaming
+    0.03 - Function Renaming and fix fuelcode
 ]]--
 
 -- Locals Variables
 local noFuelNeeded = 0 -- Check if turtle is using no fuel config
-local itemFuel = 0 -- Fuel Slot 1
-local itemFuel1 = 0 -- Fuel Slot 2
+local fuelSlot1 = 0 -- Fuel Slot 1
+local fuelSlot2 = 0 -- Fuel Slot 2
 local chest = 0 -- Chest Slot 3
 local distance = 0 -- Distance will dig
 local distanceCount = 0 -- Count the distance
@@ -18,8 +18,8 @@ local errorItems = 0
 
 -- itemCheck
 local function itemCount()
-    itemFuel = turtle.getItemCount(1)
-    itemFuel1 = turtle.getItemCount(2)
+    fuelSlot1 = turtle.getItemCount(1)
+    fuelSlot2 = turtle.getItemCount(2)
     chest = turtle.getItemCount(3)
     errorItems = 0
 end
@@ -27,7 +27,7 @@ end
 -- Checking
 local function check()
     if noFuelNeed == 0 then
-        if fuelCount == 0 then
+        if fuelSlot1 == 0 then
             print("Turtle has no fuel")
             print("Put fuel in First and Second slot")
             errorItems = 1
@@ -40,7 +40,7 @@ local function check()
                 print("Turtle has Fuel Slot 1")
             end
         end
-        if fuelCount1 == 0 then
+        if fuelSlot2 == 0 then
             print("Turtle has no extra fuel but if is short job it okey")
         else
             itemData = turtle.getItemDetail(2)
@@ -68,14 +68,14 @@ local function refuel()
     if noFuelNeed == 0 then
         repeat
             if turtle.getFuelLevel() < 120 then
-                if fuelCount > 0 then
+                if fuelSlot1 > 0 then
                     turtle.select(1)
                     turtle.refuel(1)
-                    fuelCount = fuelCount - 1
-                elseif fuelCount1 > 0 then
+                    fuelSlot1 = fuelSlot1 - 1
+                elseif fuelSlot2 > 0 then
                     turtle.select(2)
                     turtle.refuel(1)
-                    fuelCount1 = fuelCount1 - 1
+                    fuelSlot2 = fuelSlot2 - 1
                 else
                     print("Out Of Fuel")
                     os.shutdown()
