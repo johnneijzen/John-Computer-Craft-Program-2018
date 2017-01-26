@@ -145,7 +145,7 @@ local function start()
     end
     repeat
         itemCount()
-        check()
+        checking()
         sleep(5)
     until errorItems == 0
     tunnel()
