@@ -4,7 +4,6 @@ local options = {
 }
 local optionSize = 2
 local n
-local key
 
 local function runOptions()
 	if n == 1 then
@@ -26,7 +25,7 @@ local function gui()
 				print("     "..options[i])
 			end
 		end
-		key = os.pullEvent("key")
+		local event, key = os.pullEvent("key")
 		if key == keys.up and n > 1 then
 			n = n - 1
 		elseif key == keys.down and n < optionSize then
