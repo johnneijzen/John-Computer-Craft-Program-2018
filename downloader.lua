@@ -1,18 +1,19 @@
 --[[ 
     Version 
-        0.04
+        0.05
     Changelogs
         0.01 Added Support for Excavation2017.lua
              Added Support for Tunnel2017.lua
         0.02 Added Support for StripMining2017.lua
         0.03 Added Pre Support for Bridge2017.lua
         0.04 Compacting Code
+        0.05 Fully Added Support for Bridge2017.lua
 ]]--
 
 local download1 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Excavation2017.lua")
 local download2 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Tunnel2017.lua")
 local download3 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/StripMining2017.lua")
-local download4 = http.get("")
+local download4 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Bridge2017.lua")
 local download5 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/JohnPrograms.lua")
 
 local function downloadExcavation()
@@ -73,6 +74,8 @@ end
 local function update()
     downloadExcavation()
     downloadTunnel()
+    downloadStripMining()
+    downloadBrige()
     downloadJohnPrograms()
     shell.run("JohnPrograms")
 end

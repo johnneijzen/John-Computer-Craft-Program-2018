@@ -1,8 +1,9 @@
 --[[
 Version
-  0.01 1/26/2017
+  0.01 5/10/2017
 Changelog
   0.01 - Rewriting.
+  0.02 - Code Fixing
 ]]--
 
 -- Area
@@ -19,11 +20,11 @@ local onlight = 0
 local missingItems = 0
 -- Inventory
 local chests = 0
-local FuelSlot = 0
+local fuelSlot = 0
 local torch = 0
 
 -- ItemCheck
-local function itemCheck()
+local function itemCount()
 	fuelSlot = turtle.getItemCount(1)
 	chests = turtle.getItemCount(2)
 	torch = turtle.getItemCount(3)

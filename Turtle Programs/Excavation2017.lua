@@ -1,11 +1,12 @@
 --[[
 Version
-	0.04 1/20/2017
+	0.05 5/10/2017
 Changelog
 	0.01 1/20/2017 -- Copy my old code
 	0.02 1/20/2017 -- Added Item Worng Place Checking Code
 	0.03 1/20/2017 -- Added EnderChest Support Not Tested
-	0.04 1/26/2016 -- Bug Fixing
+	0.04 1/26/2017 -- Bug Fixing
+	0.05 5/10/2017 -- fix Small Mistakes
 ]]
 
 -- Local Variables in My New Program style it now a-z not random
@@ -17,16 +18,15 @@ local longCount = 0
 local wide = 0
 local wideCount = 0
 -- Misc
-local corrent = n
-local coalNeeded = 0
-local itemData = 0
-local progress = 0
-local progressPercent = 0
-local starting = n
-local redstoneOn = 0 -- 1 if redstone is detected and 0 if not
+local corrent
+local coalNeeded
+local itemData
+local progress
+local progressPercent
+local starting
 local totalBlocks = 0
 local totalBlocksDone = 0
-local userInput = 0
+local userInput
 -- Inventory
 local chest = 0
 local enderChest = 0
@@ -292,7 +292,7 @@ local function start()
 		print("Is This Corrent Lenght " .. "Lenght = " .. (long + 1) .. " Width = " .. (wide + 1) .. " Depth = " .. (deep))
 		print("Type y Or Y if it is correct and if not then n or N")
 		corrent = read()
-	until correct == n or N
+	until correct == N or correct == n
 	print("Okey Program Will Do Calculations")
 	totalBlocks = (wide + 1) * (long + 1) * deep -- 1 is add because above it removed for wide and long code
 	print("Total amount for block to mine is " .. totalBlocks)
@@ -305,7 +305,7 @@ local function start()
 	print("Are you using Modded EnderChest Instead")
 	print("Y or N")
 	userInput = read()
-	if userInput == "Y" then
+	if userInput == "Y" or userInput == "y" then
 		enderChest = 1
 	end
 	repeat
@@ -320,10 +320,11 @@ local function start()
 		end
 	end
 	print("Do You Want Redstone as Starting Input")
-	print("Note: Redstone can be detected from back")
+	print("Note: Redstone Input can only be detect from back turtle")
 	print("Y or N")
 	starting = read()
-	if starting == "Y" or "y" then
+	if starting == "Y" or starting == "y" then
+        local On = 0
 		repeat
 			os.pullEvent("redstone") -- Wait For Redstone Input without it break with words Too long without yielding.
 			if redstone.getInput("back") then
