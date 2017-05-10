@@ -107,19 +107,21 @@ local function main()
             forward()
             lengthCount = lengthCount + 1
         until length == lengthCount
-        if(width ~= widthCount) then
+        widthCount = widthCount + 1
+        if width ~= widthCount then
             refuel()
             lengthCount = 0
-            widthCount = widthCount + 1
             if RsOrLs == 0 then
                 turtle.turnRight()
                 turtle.forward()
                 turtle.turnRight()
+                turtle.forward()
                 RsOrLs = 1
             else
                 turtle.turnLeft()
                 turtle.forward()
                 turtle.turnLeft()
+                turtle.turtle()
                 RsOrLs = 0
             end
         end
