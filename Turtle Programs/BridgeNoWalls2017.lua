@@ -106,7 +106,7 @@ local function main()
             build()
             forward()
             lengthCount = lengthCount + 1
-        until length == lengthCount
+        until length == lengthCount - 1
         widthCount = widthCount + 1
         if width ~= widthCount then
             refuel()
