@@ -1,8 +1,9 @@
 --[[
 Version
-  0.01 5/10/2017
+  0.02 5/10/2017
 Changelog
   0.01 - Think this Program As FASTER VERSION OF Bridge 2017
+  0.02 - Fix Small Bugs
 --]]
 
 -- Locals Variables
@@ -109,9 +110,9 @@ local function main()
             refuel()
             lengthCount = 0
             widthCount = widthCount + 1
-            turtle.right()
+            turtle.turnRight()
             turtle.forward()
-            turtle.right()
+            turtle.turnRight()
         end
     until width == widthCount and length == lengthCount
 end
