@@ -121,7 +121,7 @@ local function main()
                 turtle.turnLeft()
                 turtle.forward()
                 turtle.turnLeft()
-                turtle.turtle()
+                turtle.forward()
                 RsOrLs = 0
             end
         end
