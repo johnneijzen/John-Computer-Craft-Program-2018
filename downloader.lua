@@ -1,20 +1,21 @@
 --[[ 
     Version 
-        0.05
+        0.06
     Changelogs
         0.01 Added Support for Excavation2017.lua
              Added Support for Tunnel2017.lua
         0.02 Added Support for StripMining2017.lua
         0.03 Added Pre Support for Bridge2017.lua
-        0.04 Compacting Code
         0.05 Fully Added Support for Bridge2017.lua
+        0.06 Add Support for BridgeNoWalls2017.lua
 ]]--
 
 local download1 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Excavation2017.lua")
 local download2 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Tunnel2017.lua")
 local download3 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/StripMining2017.lua")
 local download4 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Bridge2017.lua")
-local download5 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/JohnPrograms.lua")
+local download5 = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/Turtle%20Programs/Bridge2017.lua")
+local downloadGUI = http.get("https://raw.githubusercontent.com/johnneijzen/John-Computer-Craft-Program-2017/master/JohnPrograms.lua")
 
 local function downloadExcavation()
     local temp = download1.readAll()
@@ -59,10 +60,21 @@ local function downloadBrige()
     file.write(temp)
     file.close()
 end
- 
-local function downloadJohnPrograms()
+
+local function downloadBrigeNoWalls()
     local temp = download5.readAll()
     download5.close()
+
+    fs.delete("john-ComputerCraft-Program/BridgeNoWalls2017") -- To make sure it updates
+
+    local file = fs.open("john-ComputerCraft-Program/BridgeNoWalls2017","w")
+    file.write(temp)
+    file.close()
+end
+ 
+local function downloadJohnPrograms()
+    local temp = downloadGUI.readAll()
+    downloadGUI.close()
 
     fs.delete("JohnPrograms") -- To make sure it updates
 
@@ -76,6 +88,7 @@ local function update()
     downloadTunnel()
     downloadStripMining()
     downloadBrige()
+    downloadBrigeNoWalls()
     downloadJohnPrograms()
     shell.run("JohnPrograms")
 end

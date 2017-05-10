@@ -1,8 +1,9 @@
 --[[
 Version
-  0.01 9/5/2017
+  0.02 5/10/2017
 Changelog
   0.01 - First Draft
+  0.02 - Small Changes
 --]]
 
 -- Locals Variables
@@ -11,31 +12,30 @@ local itemFuel = turtle.getItemCount(1) -- Fuel Slot 1
 local itemFuel1 = turtle.getItemCount(2) -- Fuel Slot 2
 local distance = 0 -- Distance will dig
 local distanceCount = 0 -- Count the distance
-local missingFuel = 0 -- If there is missing fuel this will be 1
+local errorItems = 0
 local bridgeSize = 0 -- Brige Wide
 local currentSlot = 3 -- For checking on cobble
 local way = 0
 
--- Checking On Items
-local function checking()
+local function check()
     if noFuelNeeded == 0 then
         if itemFuel == 0 then
-            missingFuel = 1
+            errorItems = 1
         else
-            missingFuel = 0
+            errorItems = 0
         end
     end
-    if missingFuel == 1 then
+    if errorItems == 1 then
         print("Missing Fuel in Slot 1")
     end
 end
 
-local function recheck()
+local function itemCount()
     itemFuel = turtle.getItemCount(1)
-    itemFuel1 = turtle.getItemCount(2)
+    itemFuel = turtle.getItemCount(2)
 end
 
-local function reFuel()
+local function refuel()
     if noFuelNeeded == 0 then
         repeat
             if turtle.getFuelLevel() < 120 then
@@ -117,10 +117,10 @@ local function blockPlaceLeft()
 end
 
 function main()
-    reFuel()
+    refuel()
     turtle.select(3) -- this be cobble slot select
     repeat
-        reFuel()
+        refuel()
         repeat
             if turtle.getItemCount(currentSlot) <= 8 then -- this code will switch turtle slot when cobble is less than 7
                 currentSlot = currentSlot + 1
@@ -147,22 +147,18 @@ function start()
     print("This Program Make Brige Size From 3 Wide to 5 Wide")
     print("Please Enter Brige Size")
     bridgeSize = tonumber(read())
-    print("Please Input Your Fuel In Slot 1 and Slot 2(Optional)")
+    print("Please Input Your Fuel In Slot 1 and Slot 2(Optional) Slot 3-15 Building Blocks")
     print("Please Input How Far Brige Will Be")
     distance = tonumber(read())
     print("Turtle Will Make " .. distance .. " Long Brige")
     if turtle.getFuelLevel() == "unlimited" then -- just check if config of fuel is to unlimited
         noFuelNeeded = 1
     end
-    checking()
-    if missingFuel == 1 then
-        repeat
-            print("Please Put In Items That Are Missing")
-            sleep(10)
-            recheck()
-            checking()
-        until missingFuel == 0
-    end
+    repeat
+        itemCount()
+        check()
+        sleep(5)
+    until errorItems == 0
     main()
 end
 
