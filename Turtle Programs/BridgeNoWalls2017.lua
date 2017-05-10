@@ -20,6 +20,7 @@ local errorItems = 0
 -- Others
 local currentSlot = 3
 local AllowTurtleDig = 0
+local RsOrLs = 0
 
 
 local function check()
@@ -110,9 +111,17 @@ local function main()
             refuel()
             lengthCount = 0
             widthCount = widthCount + 1
-            turtle.turnRight()
-            turtle.forward()
-            turtle.turnRight()
+            if RsOrLs == 0 then
+                turtle.turnRight()
+                turtle.forward()
+                turtle.turnRight()
+                RsOrLs = 1
+            else
+                turtle.turnLeft()
+                turtle.forward()
+                turtle.turnLeft()
+                RsOrLs = 0
+            end
         end
     until width == widthCount and length == lengthCount
 end
