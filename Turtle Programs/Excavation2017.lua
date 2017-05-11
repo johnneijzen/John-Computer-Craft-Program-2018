@@ -1,12 +1,16 @@
 --[[
 Version
-	0.05 5/10/2017
+	0.06 5/10/2017
 Changelog
 	0.01 1/20/2017 -- Copy my old code
 	0.02 1/20/2017 -- Added Item Worng Place Checking Code
 	0.03 1/20/2017 -- Added EnderChest Support Not Tested
 	0.04 1/26/2017 -- Bug Fixing
 	0.05 5/10/2017 -- fix Small Mistakes
+	0.06 5/11/2017 -- Small Speed Tweaks and compacting of code
+ToDo
+    Remove Gravel code from chestDrop since turtle are now non-full blocks so gravel break when it falls on turtle.
+    it also break when it falls on chest.
 ]]
 
 -- Local Variables in My New Program style it now a-z not random
@@ -21,8 +25,8 @@ local wideCount = 0
 local corrent
 local coalNeeded
 local itemData
-local progress
-local progressPercent
+local process
+local processRaw
 local starting
 local totalBlocks = 0
 local totalBlocksDone = 0
@@ -30,10 +34,10 @@ local userInput
 -- Inventory
 local chest = 0
 local enderChest = 0
+local errorItems = 0
 local fuelCount = 0
 local fuelCount1 = 0
 local noFuelNeed = 0 -- This is 0 if fuel is needed and 1 is not needed
-local errorItems = 0
 -- Dig Misc
 local blocked = 0 -- Fixing to Chest Probleem and moving probleem
 local LorR = 0 -- Left or Right This is for Wide Code
@@ -57,7 +61,7 @@ local function check()
 		else
 			itemData = turtle.getItemDetail(1)
 			if itemData.name == "minecraft:chest" then
-				print("Worng Slot Please Move to 3rd slot")
+				print("Chest are in wrong slot please move them to slot 3")
 				errorItems = 1
 			else
 				print("Turtle has Fuel Slot 1")
@@ -68,7 +72,7 @@ local function check()
 		else
 			itemData = turtle.getItemDetail(2)
 			if itemData.name == "minecraft:chest" then
-				print("Worng Slot Please Move to 3rd slot")
+				print("Chest are in wrong slot please move them to slot 3")
 				errorItems = 1
 			else
 				print("Turtle has Fuel Slot 2")
@@ -157,9 +161,7 @@ local function mineLong()
 	if turtle.detect() then
 		turtle.dig()
 	end
-	if turtle.forward() then
-		-- Notting
-	else
+	if not turtle.forward() then
 		repeat
 			if turtle.detect() then -- First check if there is block front if there is dig if not next step.
 				turtle.dig()
@@ -192,9 +194,7 @@ local function mineWide()
 	if turtle.detect() then
 		turtle.dig()
 	end
-	if turtle.forward() then
-		--Notting
-	else
+	if not turtle.forward() then
 		repeat
 			if turtle.detect() then
 				turtle.dig()
@@ -293,14 +293,15 @@ local function start()
 		print("Type y Or Y if it is correct and if not then n or N")
 		corrent = read()
 	until correct == N or correct == n
-	print("Okey Program Will Do Calculations")
 	totalBlocks = (wide + 1) * (long + 1) * deep -- 1 is add because above it removed for wide and long code
 	print("Total amount for block to mine is " .. totalBlocks)
 	coalNeeded = totalBlocks / 3 / 80
-	print("Total amount for Coal needed is " .. math.floor(coalNeeded+0.5))
 	if turtle.getFuelLevel() == "unlimited" then
 		print("Your turtle config does need fuel")
 		noFuelNeed = 1
+    else
+        print("Total amount for Coal needed is " .. math.floor(coalNeeded+0.5))
+        sleep(1)
 	end
 	print("Are you using Modded EnderChest Instead")
 	print("Y or N")
@@ -311,7 +312,9 @@ local function start()
 	repeat
 		itemCount()
 		check()
-		sleep(5)
+        if(errorItems ~= 0) then
+		    sleep(5)
+        end
 	until errorItems == 0
 	if noFuelNeed == 0 then
 		if turtle.getFuelLevel() < 120 then
@@ -331,14 +334,10 @@ local function start()
 				On = 1
 			end	
 		until On == 1
-		print("Turtle will now start!")
-		firstDig()
-		main()
-	else
-		print("Turtle will now start!")
-		firstDig()
-		main()
-	end	
+    end
+    print("Turtle will now start!")
+    firstDig()
+    main()
 end
 
 start()
