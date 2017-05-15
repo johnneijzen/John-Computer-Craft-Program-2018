@@ -14,14 +14,13 @@ local length = 0
 local lengthCount = 0
 -- items
 local noFuelNeeded = 0 -- Check if turtle is using no fuel config
-local itemFuel = turtle.getItemCount(1) -- Fuel Slot 1
-local itemFuel1 = turtle.getItemCount(2) -- Fuel Slot 2
+local itemFuel = 0 -- Fuel Slot 1
+local itemFuel1 = 0 -- Fuel Slot 2
 local errorItems = 0
 -- Others
 local currentSlot = 3
 local AllowTurtleDig = 0
 local RsOrLs = 0
-
 
 local function check()
     if noFuelNeeded == 0 then
@@ -65,7 +64,7 @@ local function refuel()
 end
 
 -- This Code will Switch Turtle Slot if Currect Slot has zero items and select slot
-local function selectBlock()
+local function selectBlocks()
     repeat
         if turtle.getItemCount(currentSlot) == 0 then
             currentSlot = currentSlot + 1
@@ -85,7 +84,7 @@ local function build()
             turtle.digDown()
         end
     end
-    selectBlock()
+    selectBlocks()
     turtle.placeDown()
 end
 

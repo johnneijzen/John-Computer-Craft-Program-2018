@@ -12,7 +12,7 @@ local options = {
 	"Tunnel Program 2017",
 	"Strip Mining Program 2017",
 	"Bridge Program 2017",
-    "Bridge Program No Side Walls 2017"
+	"Bridge Program No Side Walls 2017"
 }
 local optionSize = 5
 local n
