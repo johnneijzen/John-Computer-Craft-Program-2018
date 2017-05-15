@@ -19,6 +19,8 @@ local width = 0
 local widthCount = 0
 local length = 0
 local lengthCount = 0
+local height
+local heightCount
 -- Program Variables
 local itemFuel = 0 -- Fuel Slot 1
 local itemFuel1 = 0 -- Fuel Slot 2
@@ -28,6 +30,9 @@ local errorItems = 0
 local n = 1
 local optionSize = 5
 local selectedOption
+-- Misc
+local AllowTurtleDig = 1
+local RsOrLs
 
 local options = {
     "Fill",
@@ -91,8 +96,54 @@ local function selectBuildBlocks()
     until turtle.getItemCount(buildBlocksSlot) > 0
 end
 
-local function fill()
+-- Build/Place Block
+local function placeDown()
+    if AllowTurtleDig == 1 then
+        if turtle.detectDown() then
+            turtle.digDown()
+        end
+    end
+    selectBuildBlocks()
+    turtle.placeDown()
+end
 
+-- modifyed forward this can destory block in way if AllowTurtleDig is 1
+local function forward()
+    if AllowTurtleDig == 1 then
+        if turtle.detect() then
+            turtle.dig()
+        end
+    end
+    turtle.forward()
+end
+
+local function fill()
+    repeat
+        repeat
+            refuel()
+            placeDown()
+            forward()
+            lengthCount = lengthCount + 1
+        until length == lengthCount - 1
+        widthCount = widthCount + 1
+        if width ~= widthCount then
+            refuel()
+            lengthCount = 0
+            if RsOrLs == 0 then
+                turtle.turnRight()
+                turtle.forward()
+                turtle.turnRight()
+                turtle.forward()
+                RsOrLs = 1
+            else
+                turtle.turnLeft()
+                turtle.forward()
+                turtle.turnLeft()
+                turtle.forward()
+                RsOrLs = 0
+            end
+        end
+    until width == widthCount and length == lengthCount
 end
 
 local function cube()
@@ -138,6 +189,9 @@ end
 
 local function start()
     print("Welcome to Multi Build Program")
+    print("Allow Turtle To Replace Blocks and Destory Blocks: 1(True) or 0(False)")
+    print("Recommend true but false is faster since it wont replace blocks or example when half it is already build")
+    AllowTurtleDig = tonumber(read())
     print("Running Options List: ")
     sleep(1)
     selectedOption = display()
@@ -148,12 +202,31 @@ local function start()
         width = tonumber(read())
         fill()
     elseif selectedOption == 2 then
+        print("Enter The Lenght: ")
+        length = tonumber(read())
+        print("Enter The Width: ")
+        width = tonumber(read())
+        print("Enter The Height ")
+        height = tonumber(read())
         cube()
     elseif selectedOption == 3 then
+
         circle()
     elseif selectedOption == 4 then
+        print("Enter The Lenght: ")
+        length = tonumber(read())
+        print("Enter The Width: ")
+        width = tonumber(read())
+        print("Enter The Height ")
+        height = tonumber(read())
         squareInSquareUpwards()
     elseif selectedOption == 5 then
+        print("Enter The Lenght: ")
+        length = tonumber(read())
+        print("Enter The Width: ")
+        width = tonumber(read())
+        print("Enter The Height ")
+        height = tonumber(read())
         squareInSquareDownwards()
     end
 
