@@ -1,8 +1,8 @@
 --[[
 Version
-  0.01 5/14/2017
+  0.02 5/14/2017
 Changelog
-  0.01 - First Draft
+  0.02 - More Writing
 TODO
   Make the 5 modes work
   fill aka 1 layer
@@ -15,10 +15,10 @@ TODO
 
 -- local Variables
 -- Area Variables
-local wide = 0
-local wideCount = 0
-local long = 0
-local longCount = 0
+local width = 0
+local widthCount = 0
+local length = 0
+local lengthCount = 0
 -- Program Variables
 local itemFuel = 0 -- Fuel Slot 1
 local itemFuel1 = 0 -- Fuel Slot 2
@@ -142,6 +142,10 @@ local function start()
     sleep(1)
     selectedOption = display()
     if selectedOption == 1 then
+        print("Enter The Lenght: ")
+        length = tonumber(read())
+        print("Enter The Width: ")
+        width = tonumber(read())
         fill()
     elseif selectedOption == 2 then
         cube()
