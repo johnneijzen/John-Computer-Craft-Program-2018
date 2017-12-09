@@ -13,6 +13,10 @@ It Be Fully Rewrite of my old program in 2015 and 2016
 
 10% Multi Build Program 2017
 
+To Download:
+pastebin get GgTJ0v0L JohnDownloader
+then run JohnDownloader this will auto start JohnPrograms aka GUI to show list of programs
+
 Ideas To Compact code
 In Place using RSorLS maybe just use wideCount % 2 == 0 if is even
 run LS else run RS this will save one variable but i dont now if is better since
