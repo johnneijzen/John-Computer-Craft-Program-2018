@@ -19,8 +19,8 @@ local width = 0
 local widthCount = 0
 local length = 0
 local lengthCount = 0
-local height
-local heightCount
+local height = 0
+local heightCount = 0
 -- Program Variables
 local itemFuel = 0 -- Fuel Slot 1
 local itemFuel1 = 0 -- Fuel Slot 2
