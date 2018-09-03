@@ -24,6 +24,7 @@ local heightCount = 0
 -- Program Variables
 local itemFuel = 0 -- Fuel Slot 1
 local itemFuel1 = 0 -- Fuel Slot 2
+local noFuelNeeded = 0 -- This is 0 if fuel is needed and 1 is not needed
 local buildBlocksSlot = 3
 local errorItems = 1
 -- Display Variables
@@ -194,6 +195,9 @@ local function start()
     print("Allow Turtle To Replace Blocks and Destory Blocks: 1(True) or 0(False)")
     print("Recommend true but false is faster since it wont replace blocks or example when half it is already build")
     AllowTurtleDig = tonumber(read())
+    if turtle.getFuelLevel() == "unlimited" then
+      noFuelNeed = 1
+    end
     repeat 
       check()
     until errorItems == 0
