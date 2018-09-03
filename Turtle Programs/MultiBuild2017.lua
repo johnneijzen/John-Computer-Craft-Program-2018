@@ -126,7 +126,6 @@ local function fill()
             forward()
             lengthCount = lengthCount + 1
         until length == lengthCount
-        widthCount = widthCount + 1
         if width ~= widthCount then
             refuel()
             lengthCount = 0
@@ -145,6 +144,7 @@ local function fill()
                 turtle.turnLeft()
                 RsOrLs = 0
             end
+          widthCount = widthCount + 1
         end
     until width == widthCount and length == lengthCount
 end
