@@ -198,10 +198,10 @@ local function start()
     if turtle.getFuelLevel() == "unlimited" then
       noFuelNeed = 1
     end
-    repeat 
+    repeat
+      itemCount()
       check()
     until errorItems == 0
-    itemCount()
     print("Running Options List: ")
     selectedOption = display()
     if selectedOption == 1 then
