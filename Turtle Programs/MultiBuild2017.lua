@@ -1,8 +1,8 @@
 --[[
 Version
-  0.02 5/14/2017
+  0.03 9/3/2018
 Changelog
-  0.02 - More Writing
+  0.03 - Fix Fill Function
 TODO
   Make the 5 modes work
   fill aka 1 layer
@@ -135,7 +135,6 @@ local function fill()
                 turtle.forward()
                 placeDown()
                 turtle.turnRight()
-                turtle.forward()
                 RsOrLs = 1
             else
                 placeDown()
@@ -143,7 +142,6 @@ local function fill()
                 turtle.forward()
                 placeDown()
                 turtle.turnLeft()
-                turtle.forward()
                 RsOrLs = 0
             end
         end
