@@ -196,6 +196,7 @@ local function start()
     AllowTurtleDig = tonumber(read())
     print("Running Options List: ")
     sleep(1)
+    refuel()
     selectedOption = display()
     if selectedOption == 1 then
         print("Enter The Lenght: ")
