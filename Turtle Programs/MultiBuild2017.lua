@@ -32,7 +32,7 @@ local optionSize = 5
 local selectedOption
 -- Misc
 local AllowTurtleDig = 1
-local RsOrLs
+local RsOrLs = 0
 
 local options = {
     "Fill",
