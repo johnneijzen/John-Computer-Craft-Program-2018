@@ -124,20 +124,24 @@ local function fill()
             placeDown()
             forward()
             lengthCount = lengthCount + 1
-        until length == lengthCount - 1
+        until length == lengthCount
         widthCount = widthCount + 1
         if width ~= widthCount then
             refuel()
             lengthCount = 0
             if RsOrLs == 0 then
+                placeDown()
                 turtle.turnRight()
                 turtle.forward()
+                placeDown()
                 turtle.turnRight()
                 turtle.forward()
                 RsOrLs = 1
             else
+                placeDown()
                 turtle.turnLeft()
                 turtle.forward()
+                placeDown()
                 turtle.turnLeft()
                 turtle.forward()
                 RsOrLs = 0
@@ -197,9 +201,9 @@ local function start()
     selectedOption = display()
     if selectedOption == 1 then
         print("Enter The Lenght: ")
-        length = tonumber(read())
+        length = (tonumber(read()) - 1)
         print("Enter The Width: ")
-        width = tonumber(read())
+        width = (tonumber(read()) - 1)
         fill()
     elseif selectedOption == 2 then
         print("Enter The Lenght: ")
