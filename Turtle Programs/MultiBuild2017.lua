@@ -25,7 +25,7 @@ local heightCount = 0
 local itemFuel = 0 -- Fuel Slot 1
 local itemFuel1 = 0 -- Fuel Slot 2
 local buildBlocksSlot = 3
-local errorItems = 0
+local errorItems = 1
 -- Display Variables
 local n = 1
 local optionSize = 5
@@ -194,9 +194,11 @@ local function start()
     print("Allow Turtle To Replace Blocks and Destory Blocks: 1(True) or 0(False)")
     print("Recommend true but false is faster since it wont replace blocks or example when half it is already build")
     AllowTurtleDig = tonumber(read())
+    repeat 
+      check()
+    until errorItems == 0
+    itemCount()
     print("Running Options List: ")
-    sleep(1)
-    refuel()
     selectedOption = display()
     if selectedOption == 1 then
         print("Enter The Lenght: ")
