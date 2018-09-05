@@ -1,4 +1,4 @@
-# John-Computer-Craft-Program-2017
+# John-Computer-Craft-Program-2018
 It Be Fully Rewrite of my old program in 2015 and 2016
 
 100% Excavation Program 2017
@@ -11,7 +11,7 @@ It Be Fully Rewrite of my old program in 2015 and 2016
 
 10% Strip Mining Program 2017
 
-10% Multi Build Program 2017
+30% Multi Build Program 2017
 
 To Download:
 
