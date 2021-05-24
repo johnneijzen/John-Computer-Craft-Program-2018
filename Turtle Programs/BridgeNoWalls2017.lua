@@ -1,9 +1,10 @@
 --[[
 Version
-  0.02 5/10/2017
+  0.03 5/24/2021
 Changelog
   0.01 - Think this Program As FASTER VERSION OF Bridge 2017
   0.02 - Fix Small Bugs
+  0.03 - English is understandable
 --]]
 
 -- Locals Variables
@@ -88,7 +89,7 @@ local function build()
     turtle.placeDown()
 end
 
--- modifyed forward this can destory block in way if AllowTurtleDig is 1
+-- modified forward this can destory block in way if AllowTurtleDig is 1
 local function forward()
     if AllowTurtleDig == 1 then
         if turtle.detect() then
@@ -128,11 +129,11 @@ local function main()
 end
 
 local function start()
-    print("Welcome To John Bridge 2017 No Side Walls Program")
+    print("Welcome To John's Bridge With No Side Walls Program")
     print("Please Input Your Fuel In Slot 1 and Slot 2(Optional) Slot 3-15 Building Blocks")
     print("Please Enter Brige Size")
     width = tonumber(read())
-    print("Please Input How Far Brige Will Be")
+    print("Please Input How Long Brige Will Be")
     length = tonumber(read())
     print("Allow Turtle to Dig Block 1(True) or 0(False)")
     AllowTurtleDig = tonumber(read())

@@ -1,19 +1,20 @@
 --[[
 Version
-  0.04 5/22/2017
+  0.05 5/24/2021
 Changelog
   0.01 - First Draft
   0.02 - Added Support for Bridge Program
   0.03 - Added Support for Bridge No Side Wall Programs
   0.04 - Added Support for Multi Menu and Add Multi Build Program
+  9.05 - English is understandable
 --]]
 
 local options = {
 	"Excavation Program 2017",
-	"Tunnel Program 3x3 2017",
+	"3x3 Tunnel Program 2017",
 	"Strip Mining Program 2017 [WIP]",
 	"Bridge Program 2017",
-	"Bridge Program No Side Walls 2017",
+	"Bridge Program with No Side Walls 2017",
     "Next Page",
     "Multi Build Program 2017[WIP]",
     "Back Page"

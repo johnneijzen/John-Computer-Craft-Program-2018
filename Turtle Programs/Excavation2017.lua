@@ -1,6 +1,6 @@
 --[[
 Version
-	0.06 5/10/2017
+	0.07 5/24/2021
 Changelog
 	0.01 1/20/2017 -- Copy my old code
 	0.02 1/20/2017 -- Added Item Worng Place Checking Code
@@ -8,6 +8,7 @@ Changelog
 	0.04 1/26/2017 -- Bug Fixing
 	0.05 5/10/2017 -- fix Small Mistakes
 	0.06 5/11/2017 -- Small Speed Tweaks and compacting of code
+	0.07 5/24/2021 -- English is understandable
 ToDo
     Remove Gravel code from chestDrop since turtle are now non-full blocks so gravel break when it falls on turtle.
     it also break when it falls on chest.
@@ -56,35 +57,35 @@ local function check()
 	if noFuelNeed == 0 then
 		if fuelCount == 0 then
 			print("Turtle has no fuel")
-			print("Put fuel in First and Second slot")
+			print("Put fuel in First and Second slots")
 			errorItems = 1
 		else
 			itemData = turtle.getItemDetail(1)
 			if itemData.name == "minecraft:chest" then
-				print("Chest are in wrong slot please move them to slot 3")
+				print("Chests are in wrong slot, please move them to slot 3")
 				errorItems = 1
 			else
 				print("Turtle has Fuel Slot 1")
 			end
 		end
 		if fuelCount1 == 0 then
-			print("Turtle has no extra fuel but if is short job it okey")
+			print("Turtle has no extra fuel if this is a short job its ok")
 		else
 			itemData = turtle.getItemDetail(2)
 			if itemData.name == "minecraft:chest" then
-				print("Chest are in wrong slot please move them to slot 3")
+				print("Chests are in wrong slot, please move them to slot 3")
 				errorItems = 1
 			else
-				print("Turtle has Fuel Slot 2")
+				print("Turtle has Fuel in Slot 2")
 			end
 		end
 	end
 	if chest == 0 then
-		print("No chest in Turtle")
-		print("Put chest in Thrid slot")
+		print("No Chests in Turtle")
+		print("Put Chests in Third slot")
 		errorItems = 1
 	else
-		print("Turtle has chest or Ender Chest")
+		print("Turtle has Chests or Ender Chest")
 	end
 	if errorItems == 1 then
 		print("Items are missing please try again")
@@ -111,7 +112,7 @@ local function chestDump()
 			chest = chest - 1
 			for slot = 4, 16 do
 				turtle.select(slot)
-				sleep(0.6) -- Small fix for slow pc because i had people problem with this
+				sleep(0.6) -- Small fix for slow pc because i had reports of problems with this
 				turtle.dropUp()
 			end
 			turtle.select(4)
@@ -119,12 +120,12 @@ local function chestDump()
 				print("Out Of Chest")
 				os.shutdown()
 			end
-		else -- Added Support Modded EnderChest
+		else -- Added Support Modded Enderchest
 			turtle.select(3)
 			turtle.placeUp()
 			for slot = 4, 16 do
 				turtle.select(slot)
-				sleep(0.6) -- Small fix for slow pc because i had people problem with this
+				sleep(0.6) -- Small fix for slow pc because i had reports of problems with this
 				turtle.dropUp()
 			end
 			turtle.select(3)
@@ -156,7 +157,7 @@ local function refuel()
 	end
 end
 
--- Mining Lenght
+-- Mining Length
 local function mineLong()
 	if turtle.detect() then
 		turtle.dig()
@@ -263,7 +264,7 @@ local function main()
 			process = totalBlocksDone / totalBlocks * 100
 			processRaw = totalBlocks - totalBlocksDone
 			print("How Much Is Done: " .. math.floor(process+0.5) .. " %")
-			print("TotalBlocks Still Need To Dig Is " .. processRaw)
+			print("Total Blocks Left Is " .. processRaw)
 			if wideCount == wide then
 				if deepCount < deep then
 					mineDeep()
@@ -276,20 +277,20 @@ local function main()
 			doneDig = 1
 		end
 	until doneDig == 1
-	print("turtle is Done")
+	print("Turtle is Done")
 end
 
 local function start()
 	print("Welcome To Excavation Turtle Program")
 	print("Slot 1: Fuel, Slot 2: Fuel, Slot 3: Chest")
 	repeat
-		print("Whats is Lenght you want")
+		print("Whats is Length you want")
 		long = tonumber(read()-1)
 		print("Whats is Width you want")
 		wide = tonumber(read()-1)
 		print("Whats is Depth You Want")
 		deep = tonumber(read())
-		print("Is This Corrent Lenght " .. "Lenght = " .. (long + 1) .. " Width = " .. (wide + 1) .. " Depth = " .. (deep))
+		print("Is This Corrent Length " .. "Length = " .. (long + 1) .. " Width = " .. (wide + 1) .. " Depth = " .. (deep))
 		print("Type y Or Y if it is correct and if not then n or N")
 		corrent = read()
 	until correct == N or correct == n
@@ -297,13 +298,13 @@ local function start()
 	print("Total amount for block to mine is " .. totalBlocks)
 	coalNeeded = totalBlocks / 3 / 80
 	if turtle.getFuelLevel() == "unlimited" then
-		print("Your turtle config does need fuel")
+		print("Your turtle config shows you do not need fuel")
 		noFuelNeed = 1
     else
-        print("Total amount for Coal needed is " .. math.floor(coalNeeded+0.5))
+        print("Total Amount of Coal needed is " .. math.floor(coalNeeded+0.5))
         sleep(1)
 	end
-	print("Are you using Modded EnderChest Instead")
+	print("Are you using Modded Enderchest Instead?")
 	print("Y or N")
 	userInput = read()
 	if userInput == "Y" or userInput == "y" then
@@ -323,7 +324,7 @@ local function start()
 		end
 	end
 	print("Do You Want Redstone as Starting Input")
-	print("Note: Redstone Input can only be detect from back turtle")
+	print("Note: Redstone Input can only be detected from back of turtle")
 	print("Y or N")
 	starting = read()
 	if starting == "Y" or starting == "y" then

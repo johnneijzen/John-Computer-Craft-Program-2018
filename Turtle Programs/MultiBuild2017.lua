@@ -1,8 +1,9 @@
 --[[
 Version
-  0.03 9/3/2018
+  0.04 5/24/2021
 Changelog
   0.03 - Fix Fill Function
+  0.04 - English is understandable
 TODO
   Make the 5 modes work
   fill aka 1 layer
@@ -108,7 +109,7 @@ local function placeDown()
     turtle.placeDown()
 end
 
--- modifyed forward this can destory block in way if AllowTurtleDig is 1
+-- modified forward this can destory block in way if AllowTurtleDig is 1
 local function forward()
     if AllowTurtleDig == 1 then
         if turtle.detect() then
@@ -144,7 +145,7 @@ local function fill()
                 turtle.turnLeft()
                 RsOrLs = 0
             end
-          widthCount = widthCount + 1
+            widthCount = widthCount + 1
         end
     until width == widthCount and length == lengthCount
 end
@@ -196,11 +197,11 @@ local function start()
     print("Recommend true but false is faster since it wont replace blocks or example when half it is already build")
     AllowTurtleDig = tonumber(read())
     if turtle.getFuelLevel() == "unlimited" then
-      noFuelNeeded = 1
+    noFuelNeeded = 1
     end
     repeat
-      itemCount()
-      check()
+    itemCount()
+    check()
     until errorItems == 0
     print("Running Options List: ")
     selectedOption = display()
