@@ -22,7 +22,6 @@ local downloadGUI = http.get("https://raw.githubusercontent.com/johnneijzen/John
 local function downloadExcavation()
     local temp = download1.readAll()
     download1.close()
-    
     fs.delete("john-ComputerCraft-Program/Excavation2017")-- To make sure it updates
     
     local file = fs.open("john-ComputerCraft-Program/Excavation2017", "w")
@@ -33,7 +32,6 @@ end
 local function downloadTunnel()
     local temp = download2.readAll()
     download2.close()
-    
     fs.delete("john-ComputerCraft-Program/Tunnel2017")-- To make sure it updates
     
     local file = fs.open("john-ComputerCraft-Program/Tunnel2017", "w")
@@ -44,7 +42,6 @@ end
 local function downloadStripMining()
     local temp = download3.readAll()
     download3.close()
-    
     fs.delete("john-ComputerCraft-Program/StripMining2017")-- To make sure it updates
     
     local file = fs.open("john-ComputerCraft-Program/StripMining2017", "w")
@@ -55,7 +52,6 @@ end
 local function downloadBrige()
     local temp = download4.readAll()
     download4.close()
-    
     fs.delete("john-ComputerCraft-Program/Bridge2017")-- To make sure it updates
     
     local file = fs.open("john-ComputerCraft-Program/Bridge2017", "w")
@@ -66,7 +62,6 @@ end
 local function downloadBrigeNoWalls()
     local temp = download5.readAll()
     download5.close()
-    
     fs.delete("john-ComputerCraft-Program/BridgeNoWalls2017")-- To make sure it updates
     
     local file = fs.open("john-ComputerCraft-Program/BridgeNoWalls2017", "w")
@@ -77,7 +72,6 @@ end
 local function downloadMultiBuild()
     local temp = download6.readAll()
     download6.close()
-    
     fs.delete("john-ComputerCraft-Program/MultiBuild2017")-- To make sure it updates
     
     local file = fs.open("john-ComputerCraft-Program/MultiBuild2017", "w")
@@ -89,7 +83,6 @@ end
 local function downloadJohnPrograms()
     local temp = downloadGUI.readAll()
     downloadGUI.close()
-    
     fs.delete("JohnPrograms")-- To make sure it updates
     
     local file = fs.open("JohnPrograms", "w")
