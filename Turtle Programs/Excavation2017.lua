@@ -1,6 +1,6 @@
 --[[
 Version
-	0.06 5/10/2017
+	0.07 5/24/2021
 Changelog
 	0.01 1/20/2017 -- Copy my old code
 	0.02 1/20/2017 -- Added Item Worng Place Checking Code
@@ -8,6 +8,7 @@ Changelog
 	0.04 1/26/2017 -- Bug Fixing
 	0.05 5/10/2017 -- fix Small Mistakes
 	0.06 5/11/2017 -- Small Speed Tweaks and compacting of code
+	0.07 5/24/2021 -- English is understandable
 ToDo
     Remove Gravel code from chestDrop since turtle are now non-full blocks so gravel break when it falls on turtle.
     it also break when it falls on chest.
@@ -111,7 +112,7 @@ local function chestDump()
 			chest = chest - 1
 			for slot = 4, 16 do
 				turtle.select(slot)
-				sleep(0.6) -- Small fix for slow pc because i had people problem with this
+				sleep(0.6) -- Small fix for slow pc because i had reports of problems with this
 				turtle.dropUp()
 			end
 			turtle.select(4)
@@ -297,7 +298,7 @@ local function start()
 	print("Total amount for block to mine is " .. totalBlocks)
 	coalNeeded = totalBlocks / 3 / 80
 	if turtle.getFuelLevel() == "unlimited" then
-		print("Your turtle config does need fuel") -- does need or does not? - fisheiyy
+		print("Your turtle config shows you do not need fuel")
 		noFuelNeed = 1
     else
         print("Total Amount of Coal needed is " .. math.floor(coalNeeded+0.5))

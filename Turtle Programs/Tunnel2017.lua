@@ -1,11 +1,12 @@
 --[[
 Version
-    0.04 - 1/26/2017
+    0.05 - 5/24/2021
 Changelog
     0.01 - 1/21/2017
     0.02 - 1/26/2017 Bug Fixing
     0.03 - Function Renaming and Fix fuelcode
     0.04 - Worng Variables Fix
+    0.05 - English is understandable
 ]]--
 
 -- Locals Variables
@@ -38,11 +39,11 @@ local function check()
                 print("Worng Slot Please Move to 3rd slot")
                 errorItems = 1
             else
-                print("Turtle has Fuel Slot 1")
+                print("Turtle has Fuel in Slot 1")
             end
         end
         if fuelSlot2 == 0 then
-            print("Turtle has no extra fuel but if is short job it okey")
+            print("Turtle has no extra fuel if this is a short job its ok")
         else
             itemData = turtle.getItemDetail(2)
             if itemData.name == "minecraft:chest" then
@@ -136,10 +137,10 @@ local function tunnel()
 end
 
 local function start()
-    print("Welcome To John Tunnel Program")
-    print("This 3x3 Tunnel Program 4x4 is coming soon after this one is done")
+    print("Welcome To John's Tunnel Program")
+    print("This program creats a 3x3 tunnel")
     print("Please Input Your Fuel In Slot 1 and Slot 2(Optional) and Chest in Slot 3")
-    print("Please Input Your Distance You Want Turtle To Dig")
+    print("Please Input The Lenght Of The Tunnel")
     distance = tonumber(read())
     print("Turtle Will Dig " .. distance .. " Long")
     if turtle.getFuelLevel() == "unlimited" then -- just check if config of fuel is to unlimited

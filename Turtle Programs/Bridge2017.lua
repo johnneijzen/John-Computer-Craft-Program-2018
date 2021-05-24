@@ -1,9 +1,10 @@
 --[[
 Version
-  0.02 5/10/2017
+  0.03 5/24/2021
 Changelog
   0.01 - First Draft
   0.02 - Small Changes
+  0.03 - English is understandable
 --]]
 
 -- Locals Variables
@@ -118,7 +119,7 @@ end
 
 function main()
     refuel()
-    turtle.select(3) -- this be cobble slot select
+    turtle.select(3) -- this is cobble slot select
     repeat
         refuel()
         repeat
@@ -143,12 +144,12 @@ function main()
 end
 
 function start()
-    print("Welcome To John Bridge Program")
-    print("This Program Make Brige Size From 3 Wide to 5 Wide")
+    print("Welcome To John's Bridge Program")
+    print("This Program Will Make A Brige From 3 Wide to 5 Wide")
     print("Please Enter Brige Size")
     bridgeSize = tonumber(read())
     print("Please Input Your Fuel In Slot 1 and Slot 2(Optional) Slot 3-15 Building Blocks")
-    print("Please Input How Far Brige Will Be")
+    print("Please Input How Long Brige Will Be")
     distance = tonumber(read())
     print("Turtle Will Make " .. distance .. " Long Brige")
     if turtle.getFuelLevel() == "unlimited" then -- just check if config of fuel is to unlimited

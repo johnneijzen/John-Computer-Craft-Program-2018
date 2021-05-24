@@ -1,9 +1,10 @@
 --[[
 Version
-  0.01 5/10/2017
+  0.03 5/24/2021
 Changelog
   0.01 - Rewriting.
   0.02 - Code Fixing
+  0.03 - English is understandable
 ]]--
 
 -- Area
@@ -36,7 +37,7 @@ local function check()
     if noFuelNeeded == 0 then
         if fuelSlot == 0 then
             print("Turtle has no fuel")
-            print("Put fuel in First")
+            print("Put fuel in First slot")
             missingItems = 1
         else
             print("Turtle has Fuel")
@@ -47,7 +48,7 @@ local function check()
         print("Put chests in 1 slot")
         missingItems = 1
     else
-        print("Turtle has chest")
+        print("Turtle has chests")
     end
     if missingItems == 1 then
         print("Items are missing please try again")
@@ -82,7 +83,7 @@ local function chestDump()
 		chests = chests - 1
 		for slot = 5, 16 do
 			turtle.select(slot)
-			sleep(0.6) -- Small fix for slow pc because i had people problem with this
+			sleep(0.6) -- Small fix for slow pc because i had repots of problems with this
 			turtle.dropDown()
 		end
 		turtle.select(4)
@@ -193,10 +194,10 @@ end
 
 -- Starting 
 local function start()
-	print("Welcome to Mining Turtle Program")
-	print("Slot 1: Fuel, Slot 2: Chests, Optional Slot 3: Torchs")
+	print("Welcome to John's Mining Turtle Program")
+	print("Slot 1: Fuel, Slot 2: Chests, (Optional Slot 3: Torchs)")
 	print("Note: turtle will still work when there is no more torchs")
-	print("How many block far does each mine be")
+	print("How many block long will these mines be?")
 	distance = tonumber(read())
 	print("Left or Right")
 	print("0 = Left and 1 = Right")
@@ -207,7 +208,7 @@ local function start()
 	distanceApart = tonumber(read())
 	distanceApart = distanceApart + 1
 	if turtle.getFuelLevel() == "unlimited" then
-		print("Your turtle config does need fuel")
+		print("Your turtle config shows you do not need fuel")
 		noFuelNeed = 1
 	end
 	repeat
