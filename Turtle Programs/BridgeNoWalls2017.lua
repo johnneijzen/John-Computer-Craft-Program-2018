@@ -1,11 +1,12 @@
 --[[
-Version
-  0.03 5/24/2021
-Changelog
-  0.01 - Think this Program As FASTER VERSION OF Bridge 2017
-  0.02 - Fix Small Bugs
-  0.03 - English is understandable
---]]
+    Version
+    0.04 5/24/2021
+    Changelog
+    0.01 - Think this Program As FASTER VERSION OF Bridge 2017
+    0.02 - Fix Small Bugs
+    0.03 - English is understandable
+    0.04 5/24/2021 - Code Formatting
+]]
 
 -- Locals Variables
 -- Area

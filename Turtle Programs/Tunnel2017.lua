@@ -1,13 +1,14 @@
 --[[
-Version
-    0.05 - 5/24/2021
-Changelog
+    Version
+    0.06 - 5/24/2021
+    Changelog
     0.01 - 1/21/2017
     0.02 - 1/26/2017 Bug Fixing
     0.03 - Function Renaming and Fix fuelcode
     0.04 - Worng Variables Fix
     0.05 - English is understandable
-]]--
+    0.06 5/24/2021 - Code Formatting
+]]
 
 -- Locals Variables
 local noFuelNeeded = 0 -- Check if turtle is using no fuel config
@@ -62,7 +63,7 @@ local function check()
     if errorItems == 1 then
         print("Items are missing please try again")
         print("Turtle will recheck in 5 sec")
-    end 
+    end
 end
 
 -- Refuel
@@ -109,7 +110,7 @@ local function dig()
 end
 
 local function chestDump()
-    if turtle.getItemCount(16)> 0 then -- If slot 16 in turtle has item slot 4 to 16 will go to chest
+    if turtle.getItemCount(16) > 0 then -- If slot 16 in turtle has item slot 4 to 16 will go to chest
         if Chest ~= 0 then
             turtle.select(3)
             turtle.digDown()
@@ -119,7 +120,7 @@ local function chestDump()
                 sleep(0.6) -- Small fix for slow pc because i had people problem with this
                 turtle.dropDown()
             end
-        turtle.select(4)
+            turtle.select(4)
         else
             print("Out Of Chest")
             os.shutdown()
