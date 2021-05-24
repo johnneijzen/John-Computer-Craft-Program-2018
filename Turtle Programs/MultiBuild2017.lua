@@ -1,18 +1,18 @@
 --[[
-Version
-  0.04 5/24/2021
-Changelog
-  0.03 - Fix Fill Function
-  0.04 - English is understandable
-TODO
-  Make the 5 modes work
-  fill aka 1 layer
-  cube
-  circle
-  square in square upwards
-  square in square downwards
---]]
-
+    Version
+    0.05 5/24/2021
+    Changelog
+    0.03 - Fix Fill Function
+    0.04 - English is understandable
+    0.05 5/24/2021 - Code Formatting
+    TODO
+    Make the 5 modes work
+    fill aka 1 layer
+    cube
+    circle
+    square in square upwards
+    square in square downwards
+]]
 
 -- local Variables
 -- Area Variables
@@ -169,13 +169,13 @@ end
 local function display()
     while true do
         term.clear()
-        term.setCursorPos(1,1)
+        term.setCursorPos(1, 1)
         for i = 1, optionSize do
-            if n==i then
-                print("---> "..options[i])
+            if n == i then
+                print("---> " .. options[i])
                 print("")
             else
-                print("     "..options[i])
+                print("     " .. options[i])
                 print("")
             end
         end
@@ -197,11 +197,11 @@ local function start()
     print("Recommend true but false is faster since it wont replace blocks or example when half it is already build")
     AllowTurtleDig = tonumber(read())
     if turtle.getFuelLevel() == "unlimited" then
-    noFuelNeeded = 1
+        noFuelNeeded = 1
     end
     repeat
-    itemCount()
-    check()
+        itemCount()
+        check()
     until errorItems == 0
     print("Running Options List: ")
     selectedOption = display()
@@ -220,7 +220,7 @@ local function start()
         height = tonumber(read())
         cube()
     elseif selectedOption == 3 then
-
+        
         circle()
     elseif selectedOption == 4 then
         print("Enter The Lenght: ")

@@ -1,16 +1,17 @@
 --[[
-Version
-  0.03 5/24/2021
-Changelog
-  0.01 - First Draft
-  0.02 - Small Changes
-  0.03 - English is understandable
---]]
+    Version
+    0.04 5/24/2021
+    Changelog
+    0.01 - First Draft
+    0.02 - Small Changes
+    0.03 - English is understandable
+    0.04 5/24/2021 - Code Formatting
+]]
 
 -- Locals Variables
 local noFuelNeeded = 0 -- Check if turtle is using no fuel config
-local itemFuel = turtle.getItemCount(1) -- Fuel Slot 1
-local itemFuel1 = turtle.getItemCount(2) -- Fuel Slot 2
+local itemFuel = turtle.getItemCount(1)-- Fuel Slot 1
+local itemFuel1 = turtle.getItemCount(2)-- Fuel Slot 2
 local distance = 0 -- Distance will dig
 local distanceCount = 0 -- Count the distance
 local errorItems = 0
@@ -119,7 +120,7 @@ end
 
 function main()
     refuel()
-    turtle.select(3) -- this is cobble slot select
+    turtle.select(3)-- this is cobble slot select
     repeat
         refuel()
         repeat
