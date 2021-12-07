@@ -95,6 +95,11 @@ local function chestDump()
     end
 end
 
+local function turnAround()
+    turtle.turnLeft()
+    turtle.turnLeft()
+end
+
 -- Every 8 block it place torch
 local function placeTorch()
     if torch > 0 then
@@ -105,11 +110,6 @@ local function placeTorch()
         torch = torch - 1
         onlight = 0
     end
-end
-
-local function turnAround()
-    turtle.turnLeft()
-    turtle.turnLeft()
 end
 
 local function dig()
