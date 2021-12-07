@@ -71,7 +71,7 @@ local function refuel()
                     os.shutdown()
                 end
             end
-        until turtle.getFuelLevel() > 120
+        until turtle.getFuelLevel() >= 120
     end
 end
 
