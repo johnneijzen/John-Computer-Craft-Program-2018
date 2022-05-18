@@ -1,6 +1,6 @@
 --[[
     Version
-    0.06 5/24/2021
+    0.07 18/5/2022
     Changelog
     0.01 - First Draft
     0.02 - Added Support for Bridge Program
@@ -8,6 +8,7 @@
     0.04 - Added Support for Multi Menu and Add Multi Build Program
     0.05 5/24/2021 - English is understandable
     0.06 5/24/2021 - Code Formatting
+    0.07 18/5/2022 - Fixed Option menu with cc:tweaked
 ]]
 
 local options = {
