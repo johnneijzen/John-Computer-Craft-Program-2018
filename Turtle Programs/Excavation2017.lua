@@ -1,6 +1,6 @@
 --[[
 	Version
-	0.08 5/24/2021
+	0.09 4/11/2024
 	Changelog
 	0.01 1/20/2017 - Copy my old code
 	0.02 1/20/2017 - Added Item Worng Place Checking Code
@@ -10,18 +10,19 @@
 	0.06 5/11/2017 - Small Speed Tweaks and compacting of code
 	0.07 5/24/2021 - English is understandable
 	0.08 5/24/2021 - Code Formatting
+    0.09 4/11/2024 - Code refactoring and cleanup
 	ToDo
 	Remove Gravel code from chestDrop since turtle are now non-full blocks so gravel break when it falls on turtle.
 	it also break when it falls on chest.
 ]]
 -- Local Variables in My New Program style it now a-z not random
 -- Area
-local deep = 0
-local deepCount = 0
-local long = 0
-local longCount = 0
-local wide = 0
-local wideCount = 0
+local depth = 0
+local depthCounter = 0
+local length = 0
+local lengthCounter = 0
+local width = 0
+local widthCounter = 0
 -- Misc
 local corrent
 local coalNeeded
@@ -40,7 +41,7 @@ local fuelCount = 0
 local fuelCount1 = 0
 local noFuelNeed = 0 -- This is 0 if fuel is needed and 1 is not needed
 -- Dig Misc
-local blocked = 0 -- Fixing to Chest Probleem and moving probleem
+local isBlocked = 0 -- Fixing to Chest Probleem and moving probleem
 local LorR = 0 -- Left or Right This is for Wide Code
 local doneDig = 0
 
@@ -53,43 +54,38 @@ local function itemCount()
 end
 
 -- Checking
-local function check()
-    if noFuelNeed == 0 then
-        if fuelCount == 0 then
-            print("Turtle has no fuel")
-            print("Put fuel in First and Second slots")
-            errorItems = 1
-        else
-            itemData = turtle.getItemDetail(1)
-            if itemData.name == "minecraft:chest" then
-                print("Chests are in wrong slot, please move them to slot 3")
-                errorItems = 1
-            else
-                print("Turtle has Fuel Slot 1")
-            end
-        end
-        if fuelCount1 == 0 then
-            print("Turtle has no extra fuel if this is a short job its ok")
-        else
-            itemData = turtle.getItemDetail(2)
-            if itemData.name == "minecraft:chest" then
-                print("Chests are in wrong slot, please move them to slot 3")
-                errorItems = 1
-            else
-                print("Turtle has Fuel in Slot 2")
-            end
-        end
-    end
-    if chest == 0 then
-        print("No Chests in Turtle")
-        print("Put Chests in Third slot")
+local function checkSlot(slot, emptyMessage, wrongItemMessage)
+    if turtle.getItemCount(slot) == 0 then
+        print("Slot " .. slot .. " is empty. " .. emptyMessage)
         errorItems = 1
     else
-        print("Turtle has Chests or Ender Chest")
+        local itemData = turtle.getItemDetail(slot)
+        if itemData.name == "minecraft:chest" then
+            print("Slot " .. slot .. " contains a chest. " .. wrongItemMessage)
+            errorItems = 1
+        else
+            print("Slot " .. slot .. " contains fuel.")
+        end
     end
+end
+
+local function check()
+    if noFuelNeed == 0 then
+        checkSlot(1, "Please place fuel in the first slot.", "Chests are not allowed in this slot. Please move them to slot 3.")
+        checkSlot(2, "This slot is empty. If this is a short job, it's okay.", "Chests are not allowed in this slot. Please move them to slot 3.")
+    end
+
+    if chest == 0 then
+        print("The turtle doesn't have any chests.")
+        print("Please place chests in the third slot.")
+        errorItems = 1
+    else
+        print("The turtle has chests or an ender chest.")
+    end
+
     if errorItems == 1 then
-        print("Items are missing please try again")
-        print("Turtle will recheck in 5 sec")
+        print("Some items are missing. Please check and try again.")
+        print("The turtle will recheck in 5 seconds.")
     end
 end
 
@@ -101,11 +97,11 @@ local function chestDump()
             if turtle.detectUp() then -- if there is gravel remove it before placing chest
                 turtle.digUp()
                 sleep(0.6)
-                blocked = 1
+                isBlocked = 1
             else
-                blocked = 0
+                isBlocked = 0
             end
-        until blocked == 0
+        until isBlocked == 0
         if enderChest == 0 then
             turtle.select(3)
             turtle.placeUp()
@@ -168,12 +164,12 @@ local function mineLong()
                 turtle.dig()
                 sleep(0.6)
             end
-            if turtle.forward() then -- try to move if turtle can move blocked == 0 if cant move then blocked 1
-                blocked = 0
+            if turtle.forward() then -- try to move if turtle can move isBlocked == 0 if cant move then isBlocked 1
+                isBlocked = 0
             else
-                blocked = 1
+                isBlocked = 1
             end
-        until blocked == 0
+        until isBlocked == 0
     end
     if turtle.detectUp() then
         turtle.digUp()
@@ -181,7 +177,7 @@ local function mineLong()
     if turtle.detectDown() then
         turtle.digDown()
     end
-    longCount = longCount + 1
+    lengthCounter = lengthCounter + 1
     totalBlocksDone = totalBlocksDone + 3
 end
 
@@ -202,11 +198,11 @@ local function mineWide()
                 sleep(0.6)
             end
             if turtle.forward() then
-                blocked = 0
+                isBlocked = 0
             else
-                blocked = 1
+                isBlocked = 1
             end
-        until blocked == 0
+        until isBlocked == 0
     end
     if turtle.detectUp() then
         turtle.digUp()
@@ -221,8 +217,8 @@ local function mineWide()
         turtle.turnLeft()
         LorR = 0
     end
-    longCount = 0
-    wideCount = wideCount + 1
+    lengthCounter = 0
+    widthCounter = widthCounter + 1
     totalBlocksDone = totalBlocksDone + 3
 end
 
@@ -237,9 +233,9 @@ local function mineDeep()
     turtle.digDown()
     turtle.turnRight()
     turtle.turnRight()
-    wideCount = 0
-    longCount = 0
-    deepCount = deepCount + 3
+    widthCounter = 0
+    lengthCounter = 0
+    depthCounter = depthCounter + 3
     totalBlocksDone = totalBlocksDone + 3
 end
 
@@ -249,9 +245,9 @@ local function firstDig()
     turtle.digDown()
     turtle.down()
     turtle.digDown()
-    wideCount = 0
-    longCount = 0
-    deepCount = deepCount + 3
+    widthCounter = 0
+    lengthCounter = 0
+    depthCounter = depthCounter + 3
     totalBlocksDone = totalBlocksDone + 3
 end
 
@@ -260,20 +256,20 @@ local function main()
         mineLong()
         refuel()
         chestDump()
-        if longCount == long then
+        if lengthCounter == length then
             process = totalBlocksDone / totalBlocks * 100
             processRaw = totalBlocks - totalBlocksDone
             print("How Much Is Done: " .. math.floor(process + 0.5) .. " %")
             print("Total Blocks Left Is " .. processRaw)
-            if wideCount == wide then
-                if deepCount < deep then
+            if widthCounter == width then
+                if depthCounter < depth then
                     mineDeep()
                 end
             else
                 mineWide()
             end
         end
-        if longCount == long and wideCount == wide and deepCount >= deep then
+        if lengthCounter == length and widthCounter == width and depthCounter >= depth then
             doneDig = 1
         end
     until doneDig == 1
@@ -281,33 +277,33 @@ local function main()
 end
 
 local function start()
-    print("Welcome To Excavation Turtle Program")
-    print("Slot 1: Fuel, Slot 2: Fuel, Slot 3: Chest")
+    print("Welcome to the Excavation Turtle Program.")
+    print("Please ensure that Slot 1 and Slot 2 contain fuel, and Slot 3 contains a chest.")
+    local correct
     repeat
-        print("Whats is Length you want")
-        long = tonumber(read() - 1)
-        print("Whats is Width you want")
-        wide = tonumber(read() - 1)
-        print("Whats is Depth You Want")
-        deep = tonumber(read())
-        print("Is This Corrent Length " .. "Length = " .. (long + 1) .. " Width = " .. (wide + 1) .. " Depth = " .. (deep))
-        print("Type y Or Y if it is correct and if not then n or N")
-        corrent = read()
-    until correct == N or correct == n
-    totalBlocks = (wide + 1) * (long + 1) * deep -- 1 is add because above it removed for wide and long code
-    print("Total amount for block to mine is " .. totalBlocks)
+        print("Enter the desired length:")
+        length = tonumber(read()) - 1
+        print("Enter the desired width:")
+        width = tonumber(read()) - 1
+        print("Enter the desired depth:")
+        depth = tonumber(read())
+        print("You've entered: Length = " .. (length + 1) .. ", Width = " .. (width + 1) .. ", Depth = " .. depth)
+        print("If this is correct, type 'Y'. If not, type 'N'.")
+        correct = read()
+    until correct:lower() == 'n'
+    totalBlocks = (width + 1) * (length + 1) * depth
+    print("The total number of blocks to mine is " .. totalBlocks)
     coalNeeded = totalBlocks / 3 / 80
     if turtle.getFuelLevel() == "unlimited" then
-        print("Your turtle config shows you do not need fuel")
+        print("Your turtle configuration indicates that no fuel is needed.")
         noFuelNeed = 1
     else
-        print("Total Amount of Coal needed is " .. math.floor(coalNeeded + 0.5))
+        print("The total amount of coal needed is " .. math.floor(coalNeeded + 0.5))
         sleep(1)
     end
-    print("Are you using Modded Enderchest Instead?")
-    print("Y or N")
+    print("Are you using a modded Enderchest? (Y/N)")
     userInput = read()
-    if userInput == "Y" or userInput == "y" then
+    if userInput:lower() == 'y' then
         enderChest = 1
     end
     repeat
@@ -323,20 +319,19 @@ local function start()
             turtle.refuel(2)
         end
     end
-    print("Do You Want Redstone as Starting Input")
-    print("Note: Redstone Input can only be detected from back of turtle")
-    print("Y or N")
+    print("Do you want to use Redstone as a starting input? (Y/N)")
+    print("Note: Redstone input can only be detected from the back of the turtle.")
     starting = read()
-    if starting == "Y" or starting == "y" then
+    if starting:lower() == 'y' then
         local On = 0
         repeat
-            os.pullEvent("redstone")-- Wait For Redstone Input without it break with words Too long without yielding.
+            os.pullEvent("redstone")
             if redstone.getInput("back") then
                 On = 1
             end
         until On == 1
     end
-    print("Turtle will now start!")
+    print("The turtle will now start!")
     firstDig()
     main()
 end
