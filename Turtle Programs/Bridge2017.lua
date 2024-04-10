@@ -49,6 +49,7 @@ end
 local function refuel()
     if noFuelNeeded == 0 then
         repeat
+            itemCount() -- Update item counts
             if turtle.getFuelLevel() < 120 then
                 if itemFuel > 0 then
                     turtle.select(1)
