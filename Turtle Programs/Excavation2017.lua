@@ -1,6 +1,6 @@
 --[[
 	Version
-	0.09 4/11/2024
+	0.10 4/11/2024
 	Changelog
 	0.01 1/20/2017 - Copy my old code
 	0.02 1/20/2017 - Added Item Worng Place Checking Code
@@ -11,6 +11,7 @@
 	0.07 5/24/2021 - English is understandable
 	0.08 5/24/2021 - Code Formatting
     0.09 4/11/2024 - Code refactoring and cleanup
+	0.10 3/25/2025 - ops old bug mistake
 	ToDo
 	Remove Gravel code from chestDrop since turtle are now non-full blocks so gravel break when it falls on turtle.
 	it also break when it falls on chest.
@@ -290,7 +291,7 @@ local function start()
         print("You've entered: Length = " .. (length + 1) .. ", Width = " .. (width + 1) .. ", Depth = " .. depth)
         print("If this is correct, type 'Y'. If not, type 'N'.")
         correct = read()
-    until correct:lower() == 'n'
+    until correct:lower() == 'y'
     totalBlocks = (width + 1) * (length + 1) * depth
     print("The total number of blocks to mine is " .. totalBlocks)
     coalNeeded = totalBlocks / 3 / 80
