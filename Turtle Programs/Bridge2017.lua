@@ -1,6 +1,6 @@
 --[[ 
     Version
-    0.10 26/03/2025
+    0.11 26/03/2025
     Changelog
     0.01 - First Draft
     0.02 - Small Changes
@@ -12,6 +12,7 @@
     0.08 - fix random bug in cc:tweaked
     0.09 - rewrite test
     0.10 - fix rewrite code
+    0.11 - spacing issues in bridge code
 ]]
 
 -- Local Variables
