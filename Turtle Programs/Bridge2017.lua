@@ -57,7 +57,7 @@ local function refuelTurtle()
 end
 
 -- Function to place blocks on the right side
-local function placeBlocksOnRightSide()
+local function placeBlocksToRightSide()
     turtle.forward()
     turtle.down()
     if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
@@ -70,11 +70,11 @@ local function placeBlocksOnRightSide()
     turtle.forward()
     turtle.down()
     for _ = 1, bridgeWidth do
+        turtle.placeDown()
         turtle.forward()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
-        turtle.placeDown()
     end
     turtle.forward()
     turtle.placeDown()
@@ -84,7 +84,7 @@ local function placeBlocksOnRightSide()
 end
 
 -- Function to place blocks on the left side
-local function placeBlocksOnLeftSide()
+local function placeBlocksToLeftSide()
     turtle.forward()
     turtle.down()
     if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
@@ -97,11 +97,11 @@ local function placeBlocksOnLeftSide()
     turtle.forward()
     turtle.down()
     for _ = 1, bridgeWidth do
+        turtle.placeDown()
         turtle.forward()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
-        turtle.placeDown()
     end
     turtle.forward()
     turtle.placeDown()
@@ -116,10 +116,10 @@ local function constructBridge()
     switchToNextSlot()
     repeat
         if direction == 0 then
-            placeBlocksOnRightSide()
+            placeBlocksToRightSide()
             direction = 1
         else
-            placeBlocksOnLeftSide()
+            placeBlocksToLeftSide()
             direction = 0
         end
         bridgeLengthCounter = bridgeLengthCounter + 1
