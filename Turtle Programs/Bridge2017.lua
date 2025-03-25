@@ -1,6 +1,6 @@
 --[[ 
     Version
-    0.11 26/03/2025
+    0.12 26/03/2025
     Changelog
     0.01 - First Draft
     0.02 - Small Changes
@@ -13,6 +13,7 @@
     0.09 - rewrite test
     0.10 - fix rewrite code
     0.11 - spacing issues in bridge code
+    0.12 - fix refuel and detectDown issues
 ]]
 
 -- Local Variables
@@ -49,7 +50,7 @@ local function refuelTurtle()
     if isFuelUnlimited then return end
     
     for slot = 1, 2 do
-        if turtle.getFuelLevel() < 120 and turtle.getItemCount(slot) > 0 then
+        while turtle.getFuelLevel() < 180 and turtle.getItemCount(slot) > 0 do
             turtle.select(slot)
             turtle.refuel(1)
         end
@@ -61,24 +62,39 @@ end
 local function placeBlocksToRightSide()
     turtle.forward()
     turtle.down()
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
     if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
         switchToNextSlot()
     end
     turtle.placeDown()
     turtle.up()
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
     turtle.placeDown()
     turtle.turnRight()
     turtle.forward()
     turtle.down()
     for _ = 1, bridgeWidth do
+        if turtle.detectDown() then
+            turtle.digDown()
+        end
         turtle.placeDown()
         turtle.forward()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
     end
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
     turtle.placeDown()
     turtle.up()
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
     turtle.placeDown()
     turtle.turnLeft()
 end
@@ -87,24 +103,39 @@ end
 local function placeBlocksToLeftSide()
     turtle.forward()
     turtle.down()
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
     if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
         switchToNextSlot()
     end
     turtle.placeDown()
     turtle.up()
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
     turtle.placeDown()
     turtle.turnLeft()
     turtle.forward()
     turtle.down()
     for _ = 1, bridgeWidth do
+        if turtle.detectDown() then
+            turtle.digDown()
+        end
         turtle.placeDown()
         turtle.forward()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
     end
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
     turtle.placeDown()
     turtle.up()
+    if turtle.detectDown() then
+        turtle.digDown()
+    end
     turtle.placeDown()
     turtle.turnRight()
 end
@@ -114,6 +145,7 @@ local function constructBridge()
     refuelTurtle()
     switchToNextSlot()
     repeat
+        refuelTurtle()
         if direction == 0 then
             placeBlocksToRightSide()
             direction = 1
