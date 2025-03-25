@@ -1,6 +1,6 @@
 --[[ 
     Version
-    0.09 26/03/2025
+    0.10 26/03/2025
     Changelog
     0.01 - First Draft
     0.02 - Small Changes
@@ -11,6 +11,7 @@
     0.07 - code refactoring
     0.08 - fix random bug in cc:tweaked
     0.09 - rewrite test
+    0.10 - fix rewrite code
 ]]
 
 -- Local Variables
@@ -57,36 +58,56 @@ end
 
 -- Function to place blocks on the right side
 local function placeBlocksOnRightSide()
+    turtle.forward()
+    turtle.down()
+    if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
+        switchToNextSlot()
+    end
+    turtle.placeDown()
+    turtle.up()
+    turtle.placeDown()
+    turtle.turnRight()
+    turtle.forward()
+    turtle.down()
     for _ = 1, bridgeWidth do
         turtle.forward()
-        turtle.down()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
         turtle.placeDown()
-        turtle.up()
-        turtle.placeDown()
     end
-    turtle.turnRight()
     turtle.forward()
-    turtle.turnRight()
+    turtle.placeDown()
+    turtle.up()
+    turtle.placeDown()
+    turtle.turnLeft()
 end
 
 -- Function to place blocks on the left side
 local function placeBlocksOnLeftSide()
+    turtle.forward()
+    turtle.down()
+    if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
+        switchToNextSlot()
+    end
+    turtle.placeDown()
+    turtle.up()
+    turtle.placeDown()
+    turtle.turnLeft()
+    turtle.forward()
+    turtle.down()
     for _ = 1, bridgeWidth do
         turtle.forward()
-        turtle.down()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
         turtle.placeDown()
-        turtle.up()
-        turtle.placeDown()
     end
-    turtle.turnLeft()
     turtle.forward()
-    turtle.turnLeft()
+    turtle.placeDown()
+    turtle.up()
+    turtle.placeDown()
+    turtle.turnRight()
 end
 
 -- Main function to construct the bridge
@@ -113,7 +134,6 @@ local function startProgram()
     bridgeWidth = tonumber(read())
     print("Please Enter The Length Of The Bridge:")
     bridgeLength = tonumber(read())
-    
     print("Turtle Will Build A " .. bridgeLength .. " Long Bridge")
     isFuelUnlimited = turtle.getFuelLevel() == "unlimited"
     constructBridge()
