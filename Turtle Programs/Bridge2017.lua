@@ -76,7 +76,6 @@ local function placeBlocksToRightSide()
             switchToNextSlot()
         end
     end
-    turtle.forward()
     turtle.placeDown()
     turtle.up()
     turtle.placeDown()
@@ -103,7 +102,6 @@ local function placeBlocksToLeftSide()
             switchToNextSlot()
         end
     end
-    turtle.forward()
     turtle.placeDown()
     turtle.up()
     turtle.placeDown()
