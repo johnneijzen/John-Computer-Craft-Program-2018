@@ -1,19 +1,12 @@
 --[[ 
     Version
-    0.12 26/03/2025
+    0.13 26/03/2025
     Changelog
-    0.01 - First Draft
-    0.02 - Small Changes
-    0.03 - Improved readability
-    0.04 - Code formatting
-    0.05 - 11/04/2024 - Refactor code to allow switch slot for cobble without having to check for 8 or greater items
-    0.06 - code refactoring
-    0.07 - code refactoring
-    0.08 - fix random bug in cc:tweaked
     0.09 - rewrite test
     0.10 - fix rewrite code
     0.11 - spacing issues in bridge code
     0.12 - fix refuel and detectDown issues
+    0.13 - fix refuel and forward issues
 ]]
 
 -- Local Variables
@@ -56,11 +49,19 @@ local function refuelTurtle()
         end
     end
     checkFuelAvailability()
+    turtle.select(currentBuildingBlockSlot) -- Switch back to building block slot after refueling
+end
+
+-- Function to move forward with digging if necessary
+local function moveForward()
+    while not turtle.forward() do
+        turtle.dig()
+    end
 end
 
 -- Function to place blocks on the right side
 local function placeBlocksToRightSide()
-    turtle.forward()
+    moveForward()
     turtle.down()
     if turtle.detectDown() then
         turtle.digDown()
@@ -75,14 +76,14 @@ local function placeBlocksToRightSide()
     end
     turtle.placeDown()
     turtle.turnRight()
-    turtle.forward()
+    moveForward()
     turtle.down()
     for _ = 1, bridgeWidth do
         if turtle.detectDown() then
             turtle.digDown()
         end
         turtle.placeDown()
-        turtle.forward()
+        moveForward()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
@@ -101,7 +102,7 @@ end
 
 -- Function to place blocks on the left side
 local function placeBlocksToLeftSide()
-    turtle.forward()
+    moveForward()
     turtle.down()
     if turtle.detectDown() then
         turtle.digDown()
@@ -116,14 +117,14 @@ local function placeBlocksToLeftSide()
     end
     turtle.placeDown()
     turtle.turnLeft()
-    turtle.forward()
+    moveForward()
     turtle.down()
     for _ = 1, bridgeWidth do
         if turtle.detectDown() then
             turtle.digDown()
         end
         turtle.placeDown()
-        turtle.forward()
+        moveForward()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
