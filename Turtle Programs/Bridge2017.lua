@@ -1,6 +1,6 @@
 --[[ 
     Version
-    0.07 11/04/2024
+    0.08 26/03/2025
     Changelog
     0.01 - First Draft
     0.02 - Small Changes
@@ -9,6 +9,7 @@
     0.05 - 11/04/2024 - Refactor code to allow switch slot for cobble without having to check for 8 or greater items
     0.06 - code refactoring
     0.07 - code refactoring
+    0.08 - fix random bug in cc:tweaked
 ]]
 
 -- Local Variables
@@ -25,6 +26,9 @@ local direction = 0
 -- Function to switch to next slot if cobble slot is empty
 local function switchToNextSlot()
     currentBuildingBlockSlot = currentBuildingBlockSlot + 1
+    if currentBuildingBlockSlot > 16 then
+        currentBuildingBlockSlot = 3 -- Reset to the first block slot
+    end
     turtle.select(currentBuildingBlockSlot)
 end
 
