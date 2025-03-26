@@ -1,6 +1,6 @@
 --[[ 
     Version
-    0.08 26/03/2025
+    0.09 26/03/2025
     Changelog
     0.01 - First Draft
     0.02 - Small Changes
@@ -10,93 +10,79 @@
     0.06 - code refactoring
     0.07 - code refactoring
     0.08 - fix random bug in cc:tweaked
+    0.09 - rewrite test
 ]]
 
 -- Local Variables
-local isFuelUnlimited = 0
-local fuelItemCountSlot1 = 0
-local fuelItemCountSlot2 = 0
+local isFuelUnlimited = false
 local bridgeLength = 0
-local bridgeLengthCounter = 0
-local errorItemCount = 0
 local bridgeWidth = 0
+local bridgeLengthCounter = 0
 local currentBuildingBlockSlot = 3
 local direction = 0
 
--- Function to switch to next slot if cobble slot is empty
+-- Function to switch to a non-empty building block slot
 local function switchToNextSlot()
-    currentBuildingBlockSlot = currentBuildingBlockSlot + 1
-    if currentBuildingBlockSlot > 16 then
-        currentBuildingBlockSlot = 3 -- Reset to the first block slot
-    end
-    turtle.select(currentBuildingBlockSlot)
-end
-
--- Function to check for fuel and print error message if fuel is missing
-local function checkFuelAvailability()
-    if isFuelUnlimited == 0 then
-        if fuelItemCountSlot1 == 0 and fuelItemCountSlot2 == 0 then
-            print("Missing Fuel in Slot 1 or Slot 2")
-            errorItemCount = 1
-        else
-            errorItemCount = 0
+    for slot = 3, 16 do
+        if turtle.getItemCount(slot) > 0 then
+            turtle.select(slot)
+            currentBuildingBlockSlot = slot
+            return
         end
     end
+    print("Out of building blocks!")
+    os.shutdown()
 end
 
--- Function to update fuelItemCountSlot1 and fuelItemCountSlot2 counts
-local function updateFuelItemCount()
-    fuelItemCountSlot1 = turtle.getItemCount(1)
-    fuelItemCountSlot2 = turtle.getItemCount(2)
-end
-
--- Function to refuel turtle
-local function refuelTurtle()
-    if isFuelUnlimited == 0 then
-        repeat
-            if turtle.getFuelLevel() < 120 then
-                if fuelItemCountSlot1 > 0 then
-                    turtle.select(1)
-                    turtle.refuel(1)
-                    fuelItemCountSlot1 = fuelItemCountSlot1 - 1
-                elseif fuelItemCountSlot2 > 0 then
-                    turtle.select(2)
-                    turtle.refuel(1)
-                    fuelItemCountSlot2 = fuelItemCountSlot2 - 1
-                else
-                    print("Out of fuel")
-                    os.shutdown()
-                end
-            end
-        until turtle.getFuelLevel() >= 120
+-- Function to check for fuel
+local function checkFuelAvailability()
+    if not isFuelUnlimited and turtle.getFuelLevel() == 0 then
+        print("Out of fuel!")
+        os.shutdown()
     end
 end
 
--- Function to place blocks on the right side
+-- Function to refuel the turtle
+local function refuelTurtle()
+    if isFuelUnlimited then return end
+    
+    for slot = 1, 2 do
+        if turtle.getFuelLevel() < 120 and turtle.getItemCount(slot) > 0 then
+            turtle.select(slot)
+            turtle.refuel(1)
+        end
+    end
+    checkFuelAvailability()
+end
+
+-- Function to place blocks in a row
+local function placeBlockRow()
+    for _ = 1, bridgeWidth do
+        if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
+            switchToNextSlot()
+        end
+        turtle.placeDown()
+        turtle.forward()
+    end
+end
+
+-- Function to place bridge on right side
 local function placeBlocksOnRightSide()
     turtle.forward()
     turtle.down()
     switchToNextSlot()
-    for _ = 1, bridgeWidth do
-        turtle.placeDown()
-        turtle.forward()
-        switchToNextSlot()
-    end
+    placeBlockRow()
     turtle.up()
     turtle.turnRight()
 end
 
--- Function to place blocks on the left side
+-- Function to place bridge on left side
 local function placeBlocksOnLeftSide()
     turtle.forward()
     turtle.down()
     switchToNextSlot()
     turtle.turnLeft()
-    for _ = 1, bridgeWidth do
-        turtle.placeDown()
-        turtle.forward()
-        switchToNextSlot()
-    end
+    placeBlockRow()
     turtle.up()
     turtle.turnRight()
 end
@@ -104,10 +90,9 @@ end
 -- Main function to construct the bridge
 local function constructBridge()
     refuelTurtle()
-    turtle.select(3) -- Select cobble slot
+    switchToNextSlot()
     repeat
         refuelTurtle()
-        turtle.select(currentBuildingBlockSlot)
         if direction == 0 then
             placeBlocksOnRightSide()
             direction = 1
@@ -116,27 +101,20 @@ local function constructBridge()
             direction = 0
         end
         bridgeLengthCounter = bridgeLengthCounter + 1
-    until bridgeLength == bridgeLengthCounter
+    until bridgeLengthCounter >= bridgeLength
 end
 
 -- Function to start the program
 local function startProgram()
     print("Welcome To John's Bridge Program")
     print("This Program Will Make A Bridge From 3 Wide to 5 Wide")
-    print("Please Enter Bridge Size (3 to 5):")
+    print("Please Enter Bridge Width (3 to 5):")
     bridgeWidth = tonumber(read())
-    print("Please Input Your Fuel In Slot 1 and Slot 2 (Optional). Slot 3-15 Will Be Used For Building Blocks.")
-    print("Please Input The Length Of The Bridge:")
+    print("Please Enter The Length Of The Bridge:")
     bridgeLength = tonumber(read())
-    print("Turtle Will Make " .. bridgeLength .. " Long Bridge")
-    if turtle.getFuelLevel() == "unlimited" then
-        isFuelUnlimited = 1
-    end
-    repeat
-        updateFuelItemCount()
-        checkFuelAvailability()
-        sleep(5)
-    until errorItemCount == 0
+    
+    print("Turtle Will Build A " .. bridgeLength .. " Long Bridge")
+    isFuelUnlimited = turtle.getFuelLevel() == "unlimited"
     constructBridge()
 end
 
