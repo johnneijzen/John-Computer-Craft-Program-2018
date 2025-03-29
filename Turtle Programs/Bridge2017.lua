@@ -1,13 +1,8 @@
 --[[ 
     Version
-    0.14 29/03/2025
+    0.15 29/03/2025
     Changelog
-    0.09 - rewrite test
-    0.10 - fix rewrite code
-    0.11 - spacing issues in bridge code
-    0.12 - fix refuel and detectDown issues
-    0.13 - fix refuel and forward issues
-    0.14 - ensure blocks above are removed before moving up/down
+    0.15 - Ensure block placement always works by checking and switching slots when needed
 ]]
 
 -- Local Variables
@@ -24,11 +19,19 @@ local function switchToNextSlot()
         if turtle.getItemCount(slot) > 0 then
             turtle.select(slot)
             currentBuildingBlockSlot = slot
-            return
+            return true
         end
     end
     print("Out of building blocks!")
     os.shutdown()
+    return false
+end
+
+-- Function to ensure a block is available for placement
+local function ensureBlockAvailable()
+    if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
+        switchToNextSlot()
+    end
 end
 
 -- Function to check for fuel
@@ -76,56 +79,43 @@ local function moveDown()
     turtle.down()
 end
 
--- Function to place blocks on the right side
-local function placeBlocksToRightSide()
-    moveForward()
-    moveDown()
-    if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
-        switchToNextSlot()
-    end
+-- Function to place a block down
+local function placeBlockDown()
+    ensureBlockAvailable()
     turtle.placeDown()
-    moveUp()
-    turtle.placeDown()
-    turtle.turnRight()
-    moveForward()
-    moveDown()
-    for _ = 1, bridgeWidth do
-        turtle.placeDown()
-        moveForward()
-        if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
-            switchToNextSlot()
-        end
-    end
-    turtle.placeDown()
-    moveUp()
-    turtle.placeDown()
-    turtle.turnLeft()
 end
 
--- Function to place blocks on the left side
-local function placeBlocksToLeftSide()
+-- Function to place blocks on one side of the bridge
+local function placeBlocks(side)
     moveForward()
     moveDown()
-    if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
-        switchToNextSlot()
-    end
-    turtle.placeDown()
+    placeBlockDown()
     moveUp()
-    turtle.placeDown()
-    turtle.turnLeft()
+    placeBlockDown()
+    
+    if side == "right" then
+        turtle.turnRight()
+    else
+        turtle.turnLeft()
+    end
+    
     moveForward()
     moveDown()
+    
     for _ = 1, bridgeWidth do
-        turtle.placeDown()
+        placeBlockDown()
         moveForward()
-        if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
-            switchToNextSlot()
-        end
     end
-    turtle.placeDown()
+    
+    placeBlockDown()
     moveUp()
-    turtle.placeDown()
-    turtle.turnRight()
+    placeBlockDown()
+    
+    if side == "right" then
+        turtle.turnLeft()
+    else
+        turtle.turnRight()
+    end
 end
 
 -- Main function to construct the bridge
@@ -135,10 +125,10 @@ local function constructBridge()
     repeat
         refuelTurtle()
         if direction == 0 then
-            placeBlocksToRightSide()
+            placeBlocks("right")
             direction = 1
         else
-            placeBlocksToLeftSide()
+            placeBlocks("left")
             direction = 0
         end
         bridgeLengthCounter = bridgeLengthCounter + 1
