@@ -1,12 +1,13 @@
 --[[ 
     Version
-    0.13 26/03/2025
+    0.14 29/03/2025
     Changelog
     0.09 - rewrite test
     0.10 - fix rewrite code
     0.11 - spacing issues in bridge code
     0.12 - fix refuel and detectDown issues
     0.13 - fix refuel and forward issues
+    0.14 - ensure blocks above are removed before moving up/down
 ]]
 
 -- Local Variables
@@ -59,43 +60,44 @@ local function moveForward()
     end
 end
 
+-- Function to move up with block removal
+local function moveUp()
+    while turtle.detectUp() do
+        turtle.digUp()
+    end
+    turtle.up()
+end
+
+-- Function to move down with block removal
+local function moveDown()
+    while turtle.detectDown() do
+        turtle.digDown()
+    end
+    turtle.down()
+end
+
 -- Function to place blocks on the right side
 local function placeBlocksToRightSide()
     moveForward()
-    turtle.down()
-    if turtle.detectDown() then
-        turtle.digDown()
-    end
+    moveDown()
     if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
         switchToNextSlot()
     end
     turtle.placeDown()
-    turtle.up()
-    if turtle.detectDown() then
-        turtle.digDown()
-    end
+    moveUp()
     turtle.placeDown()
     turtle.turnRight()
     moveForward()
-    turtle.down()
+    moveDown()
     for _ = 1, bridgeWidth do
-        if turtle.detectDown() then
-            turtle.digDown()
-        end
         turtle.placeDown()
         moveForward()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
     end
-    if turtle.detectDown() then
-        turtle.digDown()
-    end
     turtle.placeDown()
-    turtle.up()
-    if turtle.detectDown() then
-        turtle.digDown()
-    end
+    moveUp()
     turtle.placeDown()
     turtle.turnLeft()
 end
@@ -103,40 +105,25 @@ end
 -- Function to place blocks on the left side
 local function placeBlocksToLeftSide()
     moveForward()
-    turtle.down()
-    if turtle.detectDown() then
-        turtle.digDown()
-    end
+    moveDown()
     if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
         switchToNextSlot()
     end
     turtle.placeDown()
-    turtle.up()
-    if turtle.detectDown() then
-        turtle.digDown()
-    end
+    moveUp()
     turtle.placeDown()
     turtle.turnLeft()
     moveForward()
-    turtle.down()
+    moveDown()
     for _ = 1, bridgeWidth do
-        if turtle.detectDown() then
-            turtle.digDown()
-        end
         turtle.placeDown()
         moveForward()
         if turtle.getItemCount(currentBuildingBlockSlot) == 0 then
             switchToNextSlot()
         end
     end
-    if turtle.detectDown() then
-        turtle.digDown()
-    end
     turtle.placeDown()
-    turtle.up()
-    if turtle.detectDown() then
-        turtle.digDown()
-    end
+    moveUp()
     turtle.placeDown()
     turtle.turnRight()
 end
